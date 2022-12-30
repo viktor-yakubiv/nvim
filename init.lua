@@ -1,4 +1,6 @@
-vim.cmd('source ' .. vim.fn.stdpath('config') .. '/options.vim')
-vim.cmd('source ' .. vim.fn.stdpath('config') .. '/colors.vim')
+local source = require 'lib/source'
 
-require('plugins')
+source 'options.vim'
+source 'colors.vim'
+
+require 'plugins'
