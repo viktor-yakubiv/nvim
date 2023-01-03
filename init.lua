@@ -5,3 +5,4 @@ source 'colors.vim'
 
 require 'plugins'
 require 'plugins.lualine'
+require 'plugins.cmp'
