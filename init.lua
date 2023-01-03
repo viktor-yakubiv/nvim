@@ -4,3 +4,4 @@ source 'options.vim'
 source 'colors.vim'
 
 require 'plugins'
+require 'plugins.lualine'
