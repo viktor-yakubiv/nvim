@@ -1,6 +1,7 @@
 local source = require 'lib/source'
 
 source 'options.vim'
+source 'mappings.vim'
 source 'colors.vim'
 
 require 'plugins'
