@@ -18,4 +18,9 @@ packer.startup(function (use)
   -- interface
   use 'nvim-lualine/lualine.nvim'
   use 'jeffkreeftmeijer/vim-dim'
+
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
 end)
