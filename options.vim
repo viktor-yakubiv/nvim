@@ -19,3 +19,6 @@ set wildignore+=*.pyc,*.pkl
 set wildignore+=*.DS_Store
 set wildignore+=*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv
 set wildignorecase  " ignore file and dir name cases in cmd-completion
+
+" Show hidden characters
+set list listchars=tab:▸\ ,trail:-,extends:❯,precedes:❮,nbsp:␣
