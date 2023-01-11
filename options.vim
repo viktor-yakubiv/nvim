@@ -4,6 +4,13 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
+set number relativenumber
+
+set ignorecase smartcase
+
+" Minimum lines to keep above and below cursor when scrolling
+set scrolloff=3
+
 " Ignore certain files and folders when globing
 set wildignore+=*.o,*.obj,*.dylib,*.bin,*.dll,*.exe
 set wildignore+=*/.git/*,*/.svn/*,*/__pycache__/*,*/build/**
