@@ -33,4 +33,5 @@ packer.startup(function (use)
 
   use { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' }
 	use 'numToStr/Comment.nvim'
+	use 'lewis6991/gitsigns.nvim'
 end)
