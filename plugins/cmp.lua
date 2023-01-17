@@ -104,6 +104,7 @@ cmp.setup {
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       vim_item.menu = ({
         nvim_lsp = '[LSP]',
+				gitmoji = 'Gitmoji',
         luasnip = '[Snippet]',
         buffer = '[Buffer]',
         path = '[Path]',
@@ -130,3 +131,13 @@ cmp.setup {
     ghost_text = true,
   },
 }
+
+function cmp.setup_gitcommit()
+	cmp.setup.buffer {
+		sources = {
+			{ name = 'gitmoji' }
+		}
+	}
+end
+
+vim.cmd('autocmd FileType gitcommit lua require"cmp".setup_gitcommit()')
