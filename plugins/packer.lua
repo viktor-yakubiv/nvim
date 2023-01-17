@@ -21,6 +21,7 @@ local snapshot_path = vim.fn.stdpath('data') .. '/snapshots'
 -- *: packer was installed and plugins bundle was compiled
 local packer_loaded, packer = pcall(require, 'packer')
 local packer_freshly_installed = false
+local update_period = 7 * 24 * 60 * 60 -- a week in seconds
 
 if not packer_loaded then
   print('Cloning packer...')
@@ -62,6 +63,40 @@ packer.init({
   compile_on_sync = true,
 })
 
+function packer.complete()
+	local sync_required = packer_freshly_installed
+
+	-- checks if any file in the plugins config is modified after the bundle
+	-- when `$ find ...` throws (the bundle does not exist), results to true
+	if not sync_required then
+		local plugins_config_dir = vim.fn.stdpath('config') .. '/plugins'
+		local find_cmd = 'find "' .. plugins_config_dir .. '" -newer "' .. bundle_path .. '"'
+		local fresh_configs_added = vim.fn.system(find_cmd) ~= ''
+		sync_required = fresh_configs_added
+	end
+
+	-- checks if bundle was created before our update period
+	if not sync_required then
+		local current_timestamp = os.time(os.date("!*t"))
+		local bundle_timestamp = tonumber(vim.fn.system('date -r "' .. bundle_path .. '" +%s'))
+		local stale = current_timestamp - bundle_timestamp > update_period
+		sync_required = stale
+	end
+
+	if sync_required then
+		packer.sync()
+	else
+		-- import compiled plugins
+		ok, _ = pcall(require, bundle_name)
+		if not ok then
+			-- this should never happen due to the logic above
+			-- leaving this piece of code for the sake of completeness
+			local msg = 'Plugin bundle not found. Run :PackerSync to fix'
+			vim.notify(msg, vim.log.levels.ERROR, { title = 'plugins.packer' })
+		end
+	end
+end
+
 local packer_startup = packer.startup
 local function startup(startup_fn)
   return packer_startup(function (use)
@@ -74,18 +109,6 @@ local function startup(startup_fn)
 
     -- call user startup
     startup_fn(use)
-
-    if packer_freshly_installed then
-      -- sync packer when it is just installed
-      packer.sync()
-    else
-      -- import compiled plugins
-      ok, _ = pcall(require, bundle_name)
-      if not ok then
-	local msg = 'Plugin bundle not found. Run :PackerSync to fix'
-	vim.notify(msg, vim.log.levels.ERROR, { title = 'plugins.packer' })
-      end
-    end
   end)
 end
 packer.startup = startup
