@@ -1,1 +1,1 @@
-colo dim
+colorscheme stim

@@ -24,7 +24,7 @@ packer.startup(function (use)
 
   -- interface
   use 'nvim-lualine/lualine.nvim'
-  use 'jeffkreeftmeijer/vim-dim'
+  use 'viktor-yakubiv/stim'
 
   use {
     'nvim-telescope/telescope.nvim',
