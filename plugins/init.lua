@@ -32,4 +32,5 @@ packer.startup(function (use)
   }
 
   use { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' }
+	use 'numToStr/Comment.nvim'
 end)
