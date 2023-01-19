@@ -31,7 +31,7 @@ packer.startup(function (use)
     requires = { 'nvim-lua/plenary.nvim' }
   }
 
-  use { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' }
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'numToStr/Comment.nvim'
 	use 'lewis6991/gitsigns.nvim'
 end)
