@@ -24,12 +24,14 @@ packer.startup(function (use)
 
   -- interface
   use 'nvim-lualine/lualine.nvim'
-  use 'viktor-yakubiv/stim'
+  use '~/Development/nvim/stim'
 
   use {
     'nvim-telescope/telescope.nvim',
-    requires = { 'nvim-lua/plenary.nvim' }
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = [[require 'plugins.telescope']],
   }
+	use 'nvim-telescope/telescope-symbols.nvim'
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'numToStr/Comment.nvim'
