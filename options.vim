@@ -11,6 +11,10 @@ set ignorecase smartcase
 " Minimum lines to keep above and below cursor when scrolling
 set scrolloff=3
 
+" Text up to 80 characters long
+set colorcolumn=80,120
+set nowrap " easier to navigate
+
 " Ignore certain files and folders when globing
 set wildignore+=*.o,*.obj,*.dylib,*.bin,*.dll,*.exe
 set wildignore+=*/.git/*,*/.svn/*,*/__pycache__/*,*/build/**
