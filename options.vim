@@ -22,3 +22,6 @@ set wildignorecase  " ignore file and dir name cases in cmd-completion
 
 " Show hidden characters
 set list listchars=tab:→\ ,trail:~,eol:¬,extends:❯,precedes:❮,nbsp:␣
+
+" Persistent undo even after you close a file and re-open it
+set undofile
