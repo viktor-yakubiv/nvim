@@ -16,11 +16,14 @@ packer.startup(function (use)
   use 'L3MON4D3/LuaSnip' --snippet engine
   use 'rafamadriz/friendly-snippets' -- a bunch of snippets to use
 
-  -- LSP
-  use 'neovim/nvim-lspconfig' -- enable LSP
-  use 'williamboman/mason.nvim' -- language server manager
-  use 'williamboman/mason-lspconfig.nvim'
-  use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
+  --- Language Server Protocol (LSP)
+  use 'williamboman/mason.nvim' -- language servers package manager
+  use { 'williamboman/mason-lspconfig.nvim', after = 'mason.nvim' }
+  use { -- enable LSP
+		'neovim/nvim-lspconfig',
+		after = { 'mason.nvim', 'mason-lspconfig.nvim' },
+		config = [[require 'plugins.lspconfig']], -- sets up mason too
+	}
 
   -- interface
   use 'nvim-lualine/lualine.nvim'
