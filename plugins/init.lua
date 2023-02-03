@@ -1,5 +1,7 @@
 local packer = require('plugins.packer')
 
+packer.auto_sync = true
+
 packer.startup(function (use)
   use 'gpanders/editorconfig.nvim'
 

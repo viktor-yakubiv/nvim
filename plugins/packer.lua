@@ -68,7 +68,7 @@ function packer.complete()
 
 	-- checks if any file in the plugins config is modified after the bundle
 	-- when `$ find ...` throws (the bundle does not exist), results to true
-	if not sync_required then
+	if not sync_required and packer.auto_sync then
 		local plugins_config_dir = vim.fn.stdpath('config') .. '/plugins'
 		local find_cmd = 'find "' .. plugins_config_dir .. '" -newer "' .. bundle_path .. '"'
 		local fresh_configs_added = vim.fn.system(find_cmd) ~= ''
@@ -76,7 +76,7 @@ function packer.complete()
 	end
 
 	-- checks if bundle was created before our update period
-	if not sync_required then
+	if not sync_required and packer.auto_sync then
 		local current_timestamp = os.time(os.date("!*t"))
 		local bundle_timestamp = tonumber(vim.fn.system('date -r "' .. bundle_path .. '" +%s'))
 		local stale = current_timestamp - bundle_timestamp > update_period
