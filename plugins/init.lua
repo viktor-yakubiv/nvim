@@ -6,16 +6,20 @@ packer.startup(function (use)
   use 'gpanders/editorconfig.nvim'
 
   -- completion
-  use 'hrsh7th/nvim-cmp'
-  use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' } -- buffer completions
-  use { 'hrsh7th/cmp-path', after = 'nvim-cmp' } -- path completions
-  use { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' } -- snippet completions
+  use {
+		'hrsh7th/nvim-cmp',
+		after = 'LuaSnip', -- config file requires snippet engine loaded
+		config = [[require 'plugins.cmp']],
+	}
+  use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
+  use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
+  use { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' } }
   use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
   use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
   use { 'hrsh7th/cmp-emoji', after = 'nvim-cmp' }
 
   -- snippets
-  use 'L3MON4D3/LuaSnip' --snippet engine
+  use 'L3MON4D3/LuaSnip' -- snippet engine
   use 'rafamadriz/friendly-snippets' -- a bunch of snippets to use
 
   --- Language Server Protocol (LSP)
