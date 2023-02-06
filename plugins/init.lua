@@ -17,6 +17,11 @@ packer.startup(function (use)
   use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
   use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
   use { 'hrsh7th/cmp-emoji', after = 'nvim-cmp' }
+	use {
+		'uga-rosa/cmp-dictionary',
+		after = 'nvim-cmp',
+		config = [[require 'plugins.cmp-dictionary']],
+	}
 
   -- snippets
   use 'L3MON4D3/LuaSnip' -- snippet engine

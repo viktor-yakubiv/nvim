@@ -157,6 +157,7 @@ cmp.setup {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 	-- }, {
+		{ name = 'dictionary', keyword_length = 2 },
 		{ name = 'emoji', insert = true },
 	-- }, {
 		{ name = 'buffer' },
