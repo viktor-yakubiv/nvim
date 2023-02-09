@@ -23,9 +23,9 @@ packer.startup(function (use)
 		config = [[require 'plugins.cmp-dictionary']],
 	}
 
-  -- snippets
+  --- Snippets
   use 'L3MON4D3/LuaSnip' -- snippet engine
-  use 'rafamadriz/friendly-snippets' -- a bunch of snippets to use
+  use 'rafamadriz/friendly-snippets' -- a community-driven set of snippets
 
   --- Language Server Protocol (LSP)
   use 'williamboman/mason.nvim' -- language servers package manager
