@@ -30,8 +30,7 @@ telescope.setup {
 
 	pickers = {
 		find_files = {
-			-- I don't use neither ripgrep nor fd at the moment
-			-- find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
+			find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
 		},
 
 		symbols = {
