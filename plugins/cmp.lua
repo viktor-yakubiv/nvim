@@ -194,3 +194,11 @@ cmp.setup.cmdline(':', {
 		{ name = 'cmdline' }
 	})
 })
+
+cmp.setup.filetype('gitcommit', {
+	sources = cmp.config.sources({
+		{ name = 'gitmoji' },
+		{ name = 'emoji', insert = true },
+		{ name = 'buffer' },
+	}),
+})
