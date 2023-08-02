@@ -17,7 +17,6 @@ packer.startup(function (use)
   use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
   use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
   use { 'hrsh7th/cmp-emoji', after = 'nvim-cmp' }
-	use { 'megalithic/cmp-gitmoji', after = 'nvim-cmp' }
 	use {
 		'uga-rosa/cmp-dictionary',
 		after = 'nvim-cmp',
@@ -47,6 +46,7 @@ packer.startup(function (use)
     config = [[require 'plugins.telescope']],
   }
 	use 'nvim-telescope/telescope-symbols.nvim'
+	use 'olacin/telescope-gitmoji.nvim'
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'numToStr/Comment.nvim'
