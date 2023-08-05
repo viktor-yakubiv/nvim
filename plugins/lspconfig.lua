@@ -12,11 +12,14 @@ mason_lspconfig.setup {
 	automatic_installation = settings.automatic_installation or false,
 }
 
---- Default capabilities
-local cmp_lsp = require 'cmp_nvim_lsp'
+--- Capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities = cmp_lsp.default_capabilities(capabilities)
+
+local cmp_installed, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+if cmp_installed then
+	capabilities = cmp_lsp.default_capabilities(capabilities)
+end
 
 --- Language servers setup
 local installed_server_names = mason_lspconfig.get_installed_servers()
