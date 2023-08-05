@@ -38,7 +38,7 @@ packer.startup(function (use)
 
   -- interface
   use 'nvim-lualine/lualine.nvim'
-  use '~/Development/nvim/stim'
+  use 'viktor-yakubiv/stim'
 
   use {
     'nvim-telescope/telescope.nvim',
