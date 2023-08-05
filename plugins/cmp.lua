@@ -17,61 +17,61 @@ local source_to_kind_map = {
 }
 
 local apple_kind_icons = {
-  Text = "􀅯",
-  Method = "􀀜",
-  Function = "􀝧",
-  Constructor = "􀤋",
-  Field = "􀂞",
-  Variable = "􀂾",
-  Class = "􀀈",
-  Interface = "􀀔",
-  Module = "􀐛",
-  Property = "􀎕",
-  Unit = "􀟀",
-  Value = "􀅱",
-  Enum = "􀋲",
-  Keyword = "􁠱",
-  Snippet = "􀉈",
-  Color = "􀝥",
-  File = "􀈸",
-  Reference = "􀰞",
-  Folder = "􀈖",
-  EnumMember = "􀋴",
-  Constant = "􀃤",
-  Struct = "􀻧",
-  Event = "􀋥",
-  Operator = "􀅺",
-  TypeParameter = "􀂺",
+	Text = "􀅯",
+	Method = "􀀜",
+	Function = "􀝧",
+	Constructor = "􀤋",
+	Field = "􀂞",
+	Variable = "􀂾",
+	Class = "􀀈",
+	Interface = "􀀔",
+	Module = "􀐛",
+	Property = "􀎕",
+	Unit = "􀟀",
+	Value = "􀅱",
+	Enum = "􀋲",
+	Keyword = "􁠱",
+	Snippet = "􀉈",
+	Color = "􀝥",
+	File = "􀈸",
+	Reference = "􀰞",
+	Folder = "􀈖",
+	EnumMember = "􀋴",
+	Constant = "􀃤",
+	Struct = "􀻧",
+	Event = "􀋥",
+	Operator = "􀅺",
+	TypeParameter = "􀂺",
 
 	TextMatch = '􀭥',
 	Emoji = '􀎸',
 }
 local emoji_kind_icons = {
-  Text = '✏️',
-  Method = '⏩️',
-  Function = '▶️',
-  Constructor = '🧱',
-  Field = '📦',
-  Variable = '📥',
-  Class = '💾',
-  Interface = 'ℹ️',
-  Module = '📦',
-  Property = '🔧',
-  Unit = '📏',
-  Value = '🔢',
-  Enum = '🔠',
-  Keyword = '🔑',
-  Snippet = '✂️',
-  Color = '🎨',
-  File = '📄',
-  Reference = '🔗',
-  Folder = '📁',
-  EnumMember = '🔡',
-  Constant = '🟰',
-  Struct = '🧈',
-  Event = '⚡️',
-  Operator = '🔀',
-  TypeParameter = '𝜯𝕋',
+	Text = '✏️',
+	Method = '⏩️',
+	Function = '▶️',
+	Constructor = '🧱',
+	Field = '📦',
+	Variable = '📥',
+	Class = '💾',
+	Interface = 'ℹ️',
+	Module = '📦',
+	Property = '🔧',
+	Unit = '📏',
+	Value = '🔢',
+	Enum = '🔠',
+	Keyword = '🔑',
+	Snippet = '✂️',
+	Color = '🎨',
+	File = '📄',
+	Reference = '🔗',
+	Folder = '📁',
+	EnumMember = '🔡',
+	Constant = '🟰',
+	Struct = '🧈',
+	Event = '⚡️',
+	Operator = '🔀',
+	TypeParameter = '𝜯𝕋',
 }
 local kind_icons = apple_kind_icons
 -- find more here: https://www.nerdfonts.com/cheat-sheet
@@ -145,60 +145,57 @@ local function format_item(entry, vim_item)
 end
 
 cmp.setup {
-  snippet = snippet,
+	snippet = snippet,
 	mapping = mapping,
 
-  formatting = {
-    fields = { 'kind', 'abbr' },
-    format = format_item,
-  },
+	formatting = {
+		fields = { 'kind', 'abbr' },
+		format = format_item,
+	},
 
-  sources = cmp.config.sources({
+	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
-	-- }, {
-		{ name = 'dictionary', keyword_length = 2 },
-		{ name = 'emoji', insert = true },
-	-- }, {
+		{ name = 'emoji', option = { insert = true } },
 		{ name = 'buffer' },
 		{ name = 'path' },
 	}),
 
-  confirm_opts = {
-    behavior = cmp.ConfirmBehavior.Replace,
-    select = false,
-  },
+	confirm_opts = {
+		behavior = cmp.ConfirmBehavior.Replace,
+		select = false,
+	},
 
 	window = {
 		completion = window_style,
 		documentation = window_style,
 	},
 
-  experimental = {
-    ghost_text = true,
-  },
+	experimental = {
+		ghost_text = true,
+	},
 }
 
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{ name = 'buffer' }
+		{ name = 'buffer' },
 	},
 })
 
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = 'path' }
+		{ name = 'cmdline' },
+		{ name = 'path' },
 	}, {
-		{ name = 'cmdline' }
+		{ name = 'buffer' }, -- for case when substitute command typed
 	})
 })
 
 cmp.setup.filetype('gitcommit', {
 	sources = cmp.config.sources({
-		{ name = 'gitmoji' },
-		{ name = 'emoji', insert = true },
+		{ name = 'emoji', option = { insert = true } },
 		{ name = 'buffer' },
 	}),
 })
