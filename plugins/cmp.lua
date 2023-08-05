@@ -112,7 +112,7 @@ local mapping = {
 		end
 	end, { 'i', 's' }),
 
-	['<Esc'] = cmp.mapping(function (fallback)
+	['<Esc>'] = cmp.mapping(function (fallback)
 		if cmp.visible() then
 			cmp.mapping.close()
 		elseif luasnip.expand_or_jumpable() then
@@ -122,7 +122,7 @@ local mapping = {
 		end
 	end, { 'i', 's' }),
 
-	['<C-k'] = cmp.mapping.select_prev_item(),
+	['<C-k>'] = cmp.mapping.select_prev_item(),
 	['<C-j>'] = cmp.mapping.select_next_item(),
 	['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
 	['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
