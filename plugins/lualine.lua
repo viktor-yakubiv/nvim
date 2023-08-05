@@ -1,7 +1,4 @@
-local loaded, lualine = pcall(require, 'lualine')
-if not loaded then
-  return
-end
+local lualine = require('lualine')
 
 lualine.setup {
   theme = '16color',
