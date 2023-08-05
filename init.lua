@@ -5,7 +5,3 @@ source 'keymaps.vim'
 source 'colors.vim'
 
 require 'plugins'
-require 'plugins.lualine'
-require 'plugins.treesitter'
-require 'plugins.gitsigns'
-require 'plugins.comment'
