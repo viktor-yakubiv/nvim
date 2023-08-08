@@ -112,23 +112,23 @@ local mapping = {
 		end
 	end, { 'i', 's' }),
 
-	['<Esc>'] = cmp.mapping(function (fallback)
-		if cmp.visible() then
-			cmp.mapping.close()
-		elseif luasnip.expand_or_jumpable() then
-			luasnip.unkink_current()
-		else
-			fallback()
-		end
-	end, { 'i', 's' }),
-
 	['<C-k>'] = cmp.mapping.select_prev_item(),
 	['<C-j>'] = cmp.mapping.select_next_item(),
 	['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
 	['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
 
 	['<C-CR>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-	['<CR>'] = cmp.mapping.confirm(),
+
+	['<CR>'] = cmp.mapping({
+		i = function(fallback)
+			if cmp.visible() and cmp.get_active_entry() then
+				cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+			else
+				fallback()
+			end
+		end,
+		s = cmp.mapping.confirm({ select = true }),
+	 }),
 }
 
 local window_style = cmp.config.window.bordered({
@@ -186,8 +186,9 @@ cmp.setup.cmdline({ '/', '?' }, {
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = 'cmdline' },
 		{ name = 'path' },
+	}, {
+		{ name = 'cmdline' },
 	}, {
 		{ name = 'buffer' }, -- for case when substitute command typed
 	})
