@@ -34,6 +34,7 @@ packer.startup(function (use)
 
 	--- Interface
 	use { 'nvim-lualine/lualine.nvim', config = [[require 'plugins.lualine']] }
+	use { 'nvim-tree/nvim-tree.lua', config = [[require 'plugins.tree']] }
 	use 'viktor-yakubiv/stim'
 
 	use {
