@@ -37,7 +37,35 @@ telescope.setup {
 			sources = { 'emoji', 'gitmoji' },
 		},
 	},
+
+	extensions = {
+		gitmoji = {
+			action = function(entry)
+				local emoji = entry.value.value
+
+				if vim.bo.filetype == 'gitcommit' then
+					vim.api.nvim_put({ emoji }, "c", true, true)
+					return
+				end
+
+				vim.ui.input({ prompt = "Enter commit message: " .. emoji .. " " }, function(msg)
+						if not msg then
+							return
+						end
+
+						local git_tool = ":!git"
+						if vim.g.loaded_fugitive then
+							git_tool = ":G"
+						end
+
+						vim.cmd(string.format('%s commit -m "%s %s"', git_tool, msg, emoji))
+				end)
+			end,
+		},
+	},
 }
+
+telescope.load_extension('gitmoji')
 
 -- Keymaps
 vim.keymap.set('n', '<leader><leader>', project_files)
@@ -46,3 +74,4 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files)
 vim.keymap.set('n', '<leader>fg', builtin.live_grep)
 vim.keymap.set('n', '<leader>fb', builtin.buffers)
 vim.keymap.set('n', '<leader>fh', builtin.help_tags)
+vim.keymap.set('n', '<leader>ge', telescope.extensions.gitmoji.gitmoji)
