@@ -15,7 +15,7 @@ set magic " RegExp special chars don't require escaping
 set scrolloff=3
 
 " Text up to 80 characters long
-set colorcolumn=80,120
+set colorcolumn=80,100,120
 set nowrap " easier to navigate
 set textwidth=80 " automatically add hard text wraps at 80th coolumn
 
