@@ -48,6 +48,9 @@ packer.startup(function (use)
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use { 'numToStr/Comment.nvim', config = [[require 'plugins.comment']] }
 	use { 'lewis6991/gitsigns.nvim', config = [[require 'plugins.gitsigns']] }
+
+	--- Syntax
+	use 'dannywillems/vim-icalendar'
 end)
 
 packer.complete()
