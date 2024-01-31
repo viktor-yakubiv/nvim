@@ -6,7 +6,7 @@ require('luasnip/loaders/from_vscode').lazy_load()
 
 --- Snippets
 local snippet = {
-	expand = function (args)
+	expand = function(args)
 		luasnip.lsp_expand(args.body)
 	end,
 }
@@ -14,72 +14,43 @@ local snippet = {
 -- replacing useless kind for the following sources
 local source_to_kind_map = {
 	emoji = 'Emoji',
-	buffer = 'TextMatch',
+	buffer = 'Text',
 }
 
-local apple_kind_icons = {
-	Text = "􀅯",
-	Method = "􀀜",
-	Function = "􀝧",
-	Constructor = "􀤋",
-	Field = "􀂞",
-	Variable = "􀂾",
-	Class = "􀀈",
-	Interface = "􀀔",
-	Module = "􀐛",
-	Property = "􀎕",
-	Unit = "􀟀",
-	Value = "􀅱",
-	Enum = "􀋲",
-	Keyword = "􁠱",
-	Snippet = "􀉈",
-	Color = "􀝥",
-	File = "􀈸",
-	Reference = "􀰞",
-	Folder = "􀈖",
-	EnumMember = "􀋴",
-	Constant = "􀃤",
-	Struct = "􀻧",
-	Event = "􀋥",
-	Operator = "􀅺",
-	TypeParameter = "􀂺",
-
-	TextMatch = '􀭥',
-	Emoji = '􀎸',
+local kind_icons = {
+	Text = "󰉿",
+	Method = "󰆧",
+	Function = "󰊕",
+	Constructor = "",
+	Field = " ",
+	Variable = "󰀫",
+	Class = "󰠱",
+	Interface = "",
+	Module = "",
+	Property = "󰜢",
+	Unit = "󰑭",
+	Value = "󰎠",
+	Enum = "",
+	Keyword = "󰌋",
+	Snippet = "",
+	Color = "󰏘",
+	File = "󰈙",
+	Reference = "",
+	Folder = "󰉋",
+	EnumMember = "",
+	Constant = "󰏿",
+	Struct = "",
+	Event = "",
+	Operator = "󰆕",
+	TypeParameter = " ",
+	Emoji = '󰞅',
+	Misc = " ",
 }
-local emoji_kind_icons = {
-	Text = '✏️',
-	Method = '⏩️',
-	Function = '▶️',
-	Constructor = '🧱',
-	Field = '📦',
-	Variable = '📥',
-	Class = '💾',
-	Interface = 'ℹ️',
-	Module = '📦',
-	Property = '🔧',
-	Unit = '📏',
-	Value = '🔢',
-	Enum = '🔠',
-	Keyword = '🔑',
-	Snippet = '✂️',
-	Color = '🎨',
-	File = '📄',
-	Reference = '🔗',
-	Folder = '📁',
-	EnumMember = '🔡',
-	Constant = '🟰',
-	Struct = '🧈',
-	Event = '⚡️',
-	Operator = '🔀',
-	TypeParameter = '𝜯𝕋',
-}
-local kind_icons = apple_kind_icons
--- find more here: https://www.nerdfonts.com/cheat-sheet
+-- find more at https://www.nerdfonts.com/cheat-sheet
 
 --- Mappings
 
-local has_words_before = function ()
+local has_words_before = function()
 	-- Lua 5.3 moved this, Neovim 8.2 has Lua 5.1
 	local unpack = unpack or table.unpack
 
@@ -89,7 +60,7 @@ local has_words_before = function ()
 end
 
 local mapping = {
-	['<Tab>'] = cmp.mapping(function (fallback)
+	['<Tab>'] = cmp.mapping(function(fallback)
 		if cmp.visible() then
 			cmp.select_next_item()
 		elseif luasnip.expandable() then
@@ -103,7 +74,7 @@ local mapping = {
 		end
 	end, { 'i', 's' }),
 
-	['<S-Tab>'] = cmp.mapping(function (fallback)
+	['<S-Tab>'] = cmp.mapping(function(fallback)
 		if cmp.visible() then
 			cmp.select_prev_item()
 		elseif luasnip.locally_jumpable(-1) then
@@ -129,7 +100,7 @@ local mapping = {
 			end
 		end,
 		s = cmp.mapping.confirm({ select = true }),
-	 }),
+	}),
 }
 
 local window_style = cmp.config.window.bordered({
@@ -141,7 +112,7 @@ local function format_item(entry, vim_item)
 	local kind = source_to_kind_map[entry.source.name] or vim_item.kind
 	local icon = kind_icons[kind]
 
-	vim_item.kind = string.format('%s  ', icon)
+	vim_item.kind = string.format('%s ', icon)
 	return vim_item
 end
 
@@ -157,7 +128,7 @@ cmp.setup {
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
-		{ name = 'emoji', option = { insert = true } },
+		{ name = 'emoji',   option = { insert = true } },
 		{ name = 'buffer' },
 		{ name = 'path' },
 	}),
