@@ -1,5 +1,6 @@
 try
-	colorscheme stim
+	" colorscheme stim
+	colorscheme catppuccin
 catch /^Vim\%((\a\+)\)\=:E185/
-	echo "Stim color scheme is not installed yet"
+	echo 'Color scheme is not installed yet'
 endtry

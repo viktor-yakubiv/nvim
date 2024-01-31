@@ -33,9 +33,18 @@ packer.startup(function (use)
 	}
 
 	--- Interface
-	use { 'nvim-lualine/lualine.nvim', config = [[require 'plugins.lualine']] }
+	use { 'nvim-lualine/lualine.nvim', config = [[require('lualine').setup()]] }
 	use { 'nvim-tree/nvim-tree.lua', config = [[require 'plugins.tree']] }
+	use {
+		'f-person/auto-dark-mode.nvim',
+		config = [[require('auto-dark-mode').setup()]],
+	}
 	use 'viktor-yakubiv/stim'
+	use {
+		'catppuccin/nvim',
+		as = 'catppuccin',
+		config = [[require 'plugins.catppuccin']],
+	}
 
 	use {
 		'nvim-telescope/telescope.nvim',
