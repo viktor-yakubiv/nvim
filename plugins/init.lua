@@ -53,8 +53,21 @@ packer.startup(function (use)
 	}
 	use 'nvim-telescope/telescope-symbols.nvim'
 	use 'olacin/telescope-gitmoji.nvim'
-
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		as = 'treesitter',
+		config = [[require 'plugins.treesitter']],
+		run = function()
+			local ts_update = require('nvim-treesitter.install').update()
+			ts_update()
+		end,
+	}
+	use {
+		'nvim-treesitter/nvim-treesitter-context',
+		as = 'treesitter-context',
+		requires = 'nvim-treesitter/nvim-treesitter',
+		after = 'treesitter',
+	}
 	use { 'numToStr/Comment.nvim', config = [[require 'plugins.comment']] }
 	use { 'lewis6991/gitsigns.nvim', config = [[require 'plugins.gitsigns']] }
 
