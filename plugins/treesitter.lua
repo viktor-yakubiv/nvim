@@ -9,6 +9,7 @@ configs.setup {
 		"typescript",
 		"tsx",
 
+		"markdown",
 		"bash",
 		"yaml",
 	},
