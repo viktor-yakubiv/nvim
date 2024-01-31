@@ -19,13 +19,6 @@ telescope.setup {
 				['<esc>'] = actions.close,
 			},
 		},
-
-		vimgrep_arguments = {
-			unpack(config.values.vimgrep_arguments), -- use defaults
-
-			'--hidden', -- enable search in hidden files
-			'--glob', '!**/.git/*', -- but not in git files
-		},
 	},
 
 	pickers = {
