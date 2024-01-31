@@ -13,3 +13,10 @@ nnoremap <leader>ls <cmd>lua vim.lsp.buf.signature_help()<cr>
 nnoremap <leader>lq <cmd>lua vim.diagnostic.setloclist()<cr>
 nnoremap <leader>\re <cmd>Rexplore<cr>
 nnoremap <leader>\e <cmd>Exprolore<cr>
+
+" Navigayion by pages with screen centered
+" Thanks to @ThePrimagen for sharing this nice hack
+nnoremap <C-f> <C-f>z.
+nnoremap <C-d> <C-d>z.
+nnoremap <C-b> <C-b>z.
+nnoremap <C-u> <C-u>z.
