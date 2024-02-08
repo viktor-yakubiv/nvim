@@ -7,6 +7,10 @@ packer.startup(function (use)
 
 	--- Completion
 	use {
+		'windwp/nvim-autopairs',
+		config = [[require('nvim-autopairs').setup()]],
+	}
+	use {
 		'hrsh7th/nvim-cmp',
 		after = 'LuaSnip', -- config file requires snippet engine loaded
 		config = [[require 'plugins.cmp']],
@@ -65,6 +69,11 @@ packer.startup(function (use)
 	use {
 		'nvim-treesitter/nvim-treesitter-context',
 		as = 'treesitter-context',
+		requires = 'nvim-treesitter/nvim-treesitter',
+		after = 'treesitter',
+	}
+	use {
+		'https://github.com/Wansmer/treesj',
 		requires = 'nvim-treesitter/nvim-treesitter',
 		after = 'treesitter',
 	}
