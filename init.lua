@@ -4,4 +4,4 @@ require 'plugins'
 
 source 'colors.vim'
 source 'options.vim'
-source 'keymaps.vim'
+require 'keymaps'
