@@ -40,6 +40,11 @@ packer.startup(function (use)
 	use { 'nvim-lualine/lualine.nvim', config = [[require('lualine').setup()]] }
 	use { 'nvim-tree/nvim-tree.lua', config = [[require 'plugins.tree']] }
 	use {
+		'stevearc/oil.nvim',
+		config = [[require 'plugins.oil']],
+		requires = { 'nvim-tree/nvim-web-devicons' },
+	}
+	use {
 		'f-person/auto-dark-mode.nvim',
 		config = [[require('auto-dark-mode').setup()]],
 	}
