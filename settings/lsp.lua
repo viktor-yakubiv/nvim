@@ -12,6 +12,10 @@ M.servers = {
 	emmet_ls = {
 		filetypes = { 'html', 'css', 'sass', 'scss' },
 	},
+
+	ltex = {
+		language = 'en-GB',
+	},
 }
 
 return M
