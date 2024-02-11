@@ -172,3 +172,11 @@ cmp.setup.filetype('gitcommit', {
 		{ name = 'buffer' },
 	}),
 })
+
+cmp.setup.filetype('norg', {
+	sources = cmp.config.sources {
+		{ name = 'norg' },
+		{ name = 'emoji', option = { insert = true } },
+		{ name = 'buffer' },
+	}
+})

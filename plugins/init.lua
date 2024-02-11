@@ -83,6 +83,13 @@ packer.startup(function (use)
 
 	--- Syntax
 	use 'dannywillems/vim-icalendar'
+	use {
+		'nvim-neorg/neorg',
+		config = [[require 'plugins.neorg']],
+		run = ':Neorg sync-parsers',
+		requires = 'nvim-lua/plenary.nvim',
+		after = 'nvim-cmp',
+	}
 end)
 
 packer.complete()
