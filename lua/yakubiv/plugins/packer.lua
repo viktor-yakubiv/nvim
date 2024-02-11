@@ -69,7 +69,7 @@ function packer.complete()
 	-- checks if any file in the plugins config is modified after the bundle
 	-- when `$ find ...` throws (the bundle does not exist), results to true
 	if not sync_required and packer.auto_sync then
-		local plugins_config_dir = vim.fn.stdpath('config') .. '/plugins'
+		local plugins_config_dir = vim.fn.stdpath('config') .. '/lua/yakubiv/plugins'
 		local find_cmd = 'find "' .. plugins_config_dir .. '" -newer "' .. bundle_path .. '"'
 		local fresh_configs_added = vim.fn.system(find_cmd) ~= ''
 		sync_required = fresh_configs_added

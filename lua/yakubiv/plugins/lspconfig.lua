@@ -3,7 +3,7 @@ local mason_lspconfig = require 'mason-lspconfig'
 local lspconfig = require 'lspconfig'
 
 --- Uset settings
-local settings = require 'settings.lsp'
+local settings = require 'yakubiv.settings.lsp'
 
 --- Mason (the language servers package manager) config
 mason.setup()

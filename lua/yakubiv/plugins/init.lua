@@ -1,4 +1,4 @@
-local packer = require('plugins.packer')
+local packer = require('yakubiv.plugins.packer')
 
 packer.auto_sync = true
 
@@ -13,7 +13,7 @@ packer.startup(function (use)
 	use {
 		'hrsh7th/nvim-cmp',
 		after = 'LuaSnip', -- config file requires snippet engine loaded
-		config = [[require 'plugins.cmp']],
+		config = [[require 'yakubiv.plugins.cmp']],
 	}
 	use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
 	use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
@@ -33,15 +33,15 @@ packer.startup(function (use)
 	use { -- enable LSP
 		'neovim/nvim-lspconfig',
 		after = { 'mason.nvim', 'mason-lspconfig.nvim' },
-		config = [[require 'plugins.lspconfig']], -- sets up mason too
+		config = [[require 'yakubiv.plugins.lspconfig']], -- sets up mason too
 	}
 
 	--- Interface
 	use { 'nvim-lualine/lualine.nvim', config = [[require('lualine').setup()]] }
-	use { 'nvim-tree/nvim-tree.lua', config = [[require 'plugins.tree']] }
+	use { 'nvim-tree/nvim-tree.lua', config = [[require 'yakubiv.plugins.tree']] }
 	use {
 		'stevearc/oil.nvim',
-		config = [[require 'plugins.oil']],
+		config = [[require 'yakubiv.plugins.oil']],
 		requires = { 'nvim-tree/nvim-web-devicons' },
 	}
 	use {
@@ -54,14 +54,14 @@ packer.startup(function (use)
 	use {
 		'nvim-telescope/telescope.nvim',
 		requires = { 'nvim-lua/plenary.nvim' },
-		config = [[require 'plugins.telescope']],
+		config = [[require 'yakubiv.plugins.telescope']],
 	}
 	use 'nvim-telescope/telescope-symbols.nvim'
 	use 'olacin/telescope-gitmoji.nvim'
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		as = 'treesitter',
-		config = [[require 'plugins.treesitter']],
+		config = [[require 'yakubiv.plugins.treesitter']],
 		run = function()
 			local ts_update = require('nvim-treesitter.install').update()
 			ts_update()
@@ -78,14 +78,14 @@ packer.startup(function (use)
 		requires = 'nvim-treesitter/nvim-treesitter',
 		after = 'treesitter',
 	}
-	use { 'numToStr/Comment.nvim', config = [[require 'plugins.comment']] }
-	use { 'lewis6991/gitsigns.nvim', config = [[require 'plugins.gitsigns']] }
+	use { 'numToStr/Comment.nvim', config = [[require 'yakubiv.plugins.comment']] }
+	use { 'lewis6991/gitsigns.nvim', config = [[require 'yakubiv.plugins.gitsigns']] }
 
 	--- Syntax
 	use 'dannywillems/vim-icalendar'
 	use {
 		'nvim-neorg/neorg',
-		config = [[require 'plugins.neorg']],
+		config = [[require 'yakubiv.plugins.neorg']],
 		run = ':Neorg sync-parsers',
 		requires = 'nvim-lua/plenary.nvim',
 		after = 'nvim-cmp',
