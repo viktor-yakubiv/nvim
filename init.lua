@@ -1,9 +1,5 @@
-local source = require 'lib/source'
-
 require 'plugins'
 
-source 'options.vim'
+require 'options'
 require 'appearance'
-require 'gui'
-require 'neovide'
 require 'keymaps'
