@@ -49,11 +49,7 @@ packer.startup(function (use)
 		config = [[require('auto-dark-mode').setup()]],
 	}
 	use 'viktor-yakubiv/stim'
-	use {
-		'catppuccin/nvim',
-		as = 'catppuccin',
-		config = [[require 'plugins.catppuccin']],
-	}
+	use { 'catppuccin/nvim', as = 'catppuccin' }
 
 	use {
 		'nvim-telescope/telescope.nvim',
