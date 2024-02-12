@@ -30,7 +30,7 @@ local options = {
 
 	-- Show hidden characters
 	list = true,
-	listchars= "tab:→\\ ,trail:~,eol:¬,extends:❯,precedes:❮,nbsp:␣",
+	listchars= "tab:→ ,trail:~,eol:¬,extends:❯,precedes:❮,nbsp:␣",
 
 	-- Persistent undo even after you close a file and re-open it
 	undofile = true,
