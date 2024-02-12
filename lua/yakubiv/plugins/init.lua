@@ -1,95 +1,94 @@
-local packer = require('yakubiv.plugins.packer')
+local lazy = require 'yakubiv.plugins.lazy'
 
-packer.auto_sync = true
-
-packer.startup(function (use)
-	use 'gpanders/editorconfig.nvim'
+lazy.setup {
+	'gpanders/editorconfig.nvim',
 
 	--- Completion
-	use {
+	{
 		'windwp/nvim-autopairs',
-		config = [[require('nvim-autopairs').setup()]],
-	}
-	use {
+		opts = {}
+	},
+	{
 		'hrsh7th/nvim-cmp',
-		after = 'LuaSnip', -- config file requires snippet engine loaded
-		config = [[require 'yakubiv.plugins.cmp']],
-	}
-	use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
-	use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
-	use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
-	use { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp', 'LuaSnip' } }
-	use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
-	use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
-	use { 'hrsh7th/cmp-emoji', after = 'nvim-cmp' }
+		dependencies = {
+			'LuaSnip', -- config file requires snippet engine loaded
+			{ 'hrsh7th/cmp-buffer' },
+			{ 'hrsh7th/cmp-path' },
+			{ 'hrsh7th/cmp-cmdline' },
+			{ 'saadparwaiz1/cmp_luasnip' },
+			{ 'hrsh7th/cmp-nvim-lsp' },
+			{ 'hrsh7th/cmp-nvim-lua' },
+			{ 'hrsh7th/cmp-emoji' },
+		},
+		init = function () require 'yakubiv.plugins.cmp' end,
+	},
 
 	--- Snippets
-	use 'L3MON4D3/LuaSnip' -- snippet engine
-	use 'rafamadriz/friendly-snippets' -- a community-driven set of snippets
+	'L3MON4D3/LuaSnip', -- snippet engine
+	'rafamadriz/friendly-snippets', -- a community-driven set of snippets
 
 	--- Language Server Protocol (LSP)
-	use 'williamboman/mason.nvim' -- language servers package manager
-	use { 'williamboman/mason-lspconfig.nvim', after = 'mason.nvim' }
-	use { -- enable LSP
+	'williamboman/mason.nvim', -- language servers package manager
+	{ 'williamboman/mason-lspconfig.nvim', after = 'mason.nvim' },
+	{ -- enable LSP
 		'neovim/nvim-lspconfig',
-		after = { 'mason.nvim', 'mason-lspconfig.nvim' },
-		config = [[require 'yakubiv.plugins.lspconfig']], -- sets up mason too
-	}
+		dependencies = { 'mason.nvim', 'mason-lspconfig.nvim' },
+		init = function () require 'yakubiv.plugins.lspconfig' end, -- sets up mason too
+	},
 
 	--- Interface
-	use { 'nvim-lualine/lualine.nvim', config = [[require('lualine').setup()]] }
-	use { 'nvim-tree/nvim-tree.lua', config = [[require 'yakubiv.plugins.tree']] }
-	use {
+	{ 'nvim-lualine/lualine.nvim', opts = {} },
+	{ 'nvim-tree/nvim-tree.lua', init = function () require 'yakubiv.plugins.tree' end },
+	{
 		'stevearc/oil.nvim',
-		config = [[require 'yakubiv.plugins.oil']],
-		requires = { 'nvim-tree/nvim-web-devicons' },
-	}
-	use {
+		init = function () require 'yakubiv.plugins.oil' end,
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
+	},
+	{
 		'f-person/auto-dark-mode.nvim',
-		config = [[require('auto-dark-mode').setup()]],
-	}
-	use 'viktor-yakubiv/stim'
-	use { 'catppuccin/nvim', as = 'catppuccin' }
+		opts = {},
+	},
+	{ 'catppuccin/nvim', name = 'catppuccin' },
 
-	use {
+	{
 		'nvim-telescope/telescope.nvim',
-		requires = { 'nvim-lua/plenary.nvim' },
-		config = [[require 'yakubiv.plugins.telescope']],
-	}
-	use 'nvim-telescope/telescope-symbols.nvim'
-	use 'olacin/telescope-gitmoji.nvim'
-	use {
+		dependencies = { 'nvim-lua/plenary.nvim' },
+		init = function () require 'yakubiv.plugins.telescope' end,
+	},
+	'nvim-telescope/telescope-symbols.nvim',
+	'olacin/telescope-gitmoji.nvim',
+	{
 		'nvim-treesitter/nvim-treesitter',
-		as = 'treesitter',
-		config = [[require 'yakubiv.plugins.treesitter']],
-		run = function()
+		name = 'treesitter',
+		init = function () require 'yakubiv.plugins.treesitter' end,
+		build = function()
 			local ts_update = require('nvim-treesitter.install').update()
 			ts_update()
 		end,
-	}
-	use {
+	},
+	{
 		'nvim-treesitter/nvim-treesitter-context',
-		as = 'treesitter-context',
-		requires = 'nvim-treesitter/nvim-treesitter',
+		name = 'treesitter-context',
+		dependencies = 'nvim-treesitter/nvim-treesitter',
 		after = 'treesitter',
-	}
-	use {
+	},
+	{
 		'https://github.com/Wansmer/treesj',
-		requires = 'nvim-treesitter/nvim-treesitter',
+		dependencies = 'nvim-treesitter/nvim-treesitter',
 		after = 'treesitter',
-	}
-	use { 'numToStr/Comment.nvim', config = [[require 'yakubiv.plugins.comment']] }
-	use { 'lewis6991/gitsigns.nvim', config = [[require 'yakubiv.plugins.gitsigns']] }
+	},
+	{ 'numToStr/Comment.nvim', init = function () require 'yakubiv.plugins.comment' end },
+	{ 'lewis6991/gitsigns.nvim', init = function () require 'yakubiv.plugins.gitsigns' end },
 
 	--- Syntax
-	use 'dannywillems/vim-icalendar'
-	use {
+	'dannywillems/vim-icalendar',
+	{
 		'nvim-neorg/neorg',
-		config = [[require 'yakubiv.plugins.neorg']],
-		run = ':Neorg sync-parsers',
-		requires = 'nvim-lua/plenary.nvim',
-		after = 'nvim-cmp',
-	}
-end)
-
-packer.complete()
+		init = function () require 'yakubiv.plugins.neorg' end,
+		build = ':Neorg sync-parsers',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'nvim-cmp',
+		},
+	},
+}
