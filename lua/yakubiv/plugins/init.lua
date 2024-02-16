@@ -1,9 +1,7 @@
 local lazy = require 'yakubiv.plugins.lazy'
 
-local plugins = {}
-
 -- prefix for the require() call with plugin configurations
-local plugin_prefix = "yakubiv.plugins."
+local package_prefix = "yakubiv.plugins."
 
 -- Other files in the ./plugins directory are plugin definitions
 local excluded_files = {
@@ -46,6 +44,7 @@ local function scan_files()
 	local current_file_path = debug.getinfo(2, "S").source
 	local current_dir = vim.fn.fnamemodify(current_file_path, ":h"):sub(2)
 
+	-- adopted from plenary.nvim
 	local files = {}
 	local uv = vim.loop
 	local fd = uv.fs_scandir(current_dir)
@@ -86,7 +85,7 @@ end
 local function load_configs(files)
 	local plugin_names = {}
 	for index, file_name in ipairs(files) do
-		plugin_names[index] = plugin_prefix .. string.gsub(file_name, "%.lua$", "")
+		plugin_names[index] = package_prefix .. string.gsub(file_name, "%.lua$", "")
 	end
 
 	local loaded_configs = {}
@@ -117,17 +116,16 @@ local function create_index(config)
 end
 
 local plugin_files = filter_files(scan_files(), excluded_files)
-local plugin_configs = load_configs(plugin_files)
-local plugin_map = create_index(plugin_configs)
+
+local plugin_list = normalize(load_configs(plugin_files))
+local plugin_map = create_index(plugin_list) -- associative table of plugins
 
 local function add(spec)
-	-- Lazy automatically resolves and normalizes nested lists
-	-- We simply combine everything but with adding a pretty name
-	table.insert(plugins, normalize(spec))
 end
 
 local function setup()
-	lazy.setup(plugins, {
+	-- all defined plugins are loaded
+	lazy.setup(plugin_list, {
 		ui = {
 			border = "single",
 		},
@@ -140,7 +138,7 @@ local M = setmetatable({}, {
 	end,
 })
 
-M.plugins = plugins
+M.plugins = plugin_list
 M.use = add
 M.setup = setup
 
