@@ -2,8 +2,9 @@ return {
 	'nvim-neorg/neorg',
 	dependencies = {
 		'nvim-lua/plenary.nvim',
-		'nvim-cmp',
+		'hrsh7th/nvim-cmp',
 	},
+	ft = { "norg" },
 	build = ':Neorg sync-parsers',
 	opts = {
 		load = {
