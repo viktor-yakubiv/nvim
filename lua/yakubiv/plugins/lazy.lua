@@ -25,6 +25,10 @@ local opts = {
 
 	defaults = {
 		lazy = true,
+
+		cond = function (plugin)
+			return plugin.enable ~= true
+		end,
 	},
 
 	ui = {

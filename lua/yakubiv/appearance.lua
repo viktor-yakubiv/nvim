@@ -5,23 +5,23 @@ local plugins = require 'yakubiv.plugins'
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-plugins.use {
+plugins.enable {
 	-- Automatic system appearance detection
 	-- For some reason Neovim does not pick it properly from the terminal
-	plugins.auto_dark_mode,
+	"auto_dark_mode",
 
 	-- Better status line
-	plugins.lualine,
+	"lualine",
 
 	-- Indicate line changes next to the number
-	plugins.gitsigns,
+	"gitsigns",
 
 	-- Catppuccin is my primary color scheme currently.
 	-- Previously, I have used (in chronological order):
 	-- * Monokai Pro
 	-- * Mariana and Brackets, standard dark and light schemes of Sublime Text 4
 	-- * Stim — my own color scheme, Mariana ported to terminal colours
-	plugins.catppuccin,
+	"catppuccin",
 }
 
 -- Higher priority for Lualine to make the colorscheme apply to it too

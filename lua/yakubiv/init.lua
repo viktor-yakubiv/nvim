@@ -16,18 +16,19 @@ plugins.use {
 	'dannywillems/vim-icalendar',
 }
 
-plugins.use {
-	plugins.tree,
-	plugins.oil,
-	plugins.comment,
-	plugins.lspconfig,
-	plugins.treesitter,
-	plugins.telescope,
-	plugins.which_key,
+plugins.enable {
+	"cmp",
+	"tree",
+	"oil",
+	"comment",
+	"lspconfig",
+	"treesitter",
+	"telescope",
+	"which_key",
 }
 
 require 'yakubiv.options'
 require 'yakubiv.appearance'
 require 'yakubiv.keymaps'
 
-plugins.setup()
+plugins.load()

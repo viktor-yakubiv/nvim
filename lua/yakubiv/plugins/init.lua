@@ -122,11 +122,24 @@ local plugin_files = filter_files(scan_files(), excluded_files)
 
 local plugin_list = normalize(load_configs(plugin_files))
 local plugin_map = create_index(plugin_list) -- associative table of plugins
-
-local function add(spec)
+--
+-- disable all plugins unless enabled back
+for _, plugin in ipairs(plugin_list) do
+	plugin.enabled = false
 end
 
-local function setup()
+local function enable_plugin(name)
+	if type(name) == "string" then
+		plugin_map[name:gsub("-", "_")].enabled = true
+		return
+	end
+
+	for _, n in ipairs(name) do
+		enable_plugin(n)
+	end
+end
+
+local function complete_setup()
 	-- all defined plugins are loaded
 	lazy.setup(plugin_list)
 end
@@ -138,7 +151,8 @@ local M = setmetatable({}, {
 })
 
 M.plugins = plugin_list
-M.use = add
-M.setup = setup
+M.enable = enable_plugin
+M.load = complete_setup
+M.use = function () end
 
 return M
