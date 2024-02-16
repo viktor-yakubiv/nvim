@@ -23,6 +23,7 @@ plugins.use {
 	plugins.lspconfig,
 	plugins.treesitter,
 	plugins.telescope,
+	plugins.which_key,
 }
 
 require 'yakubiv.options'
