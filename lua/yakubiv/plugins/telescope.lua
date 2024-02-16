@@ -1,8 +1,27 @@
+local plugins = {
+	'nvim-telescope/telescope.nvim',
+	name = 'telescope',
+	dependencies = {
+		{ 'nvim-lua/plenary.nvim', name = 'plenary' },
+		{
+			'nvim-telescope/telescope-fzf-native.nvim',
+			name = 'telescope-fzf',
+			build = 'make',
+		},
+		{ 'nvim-telescope/telescope-symbols.nvim', name = 'telescope-symbols' },
+		{ 'olacin/telescope-gitmoji.nvim', name = 'telescope-gitmoji' },
+	},
+}
+
+local function setup()
 local telescope = require 'telescope'
 local actions = require 'telescope.actions'
 
 telescope.setup {
 	defaults = {
+		prompt_prefix = ' 󰍉  ',
+		selection_caret = ' ',
+		-- multi_icon = '',
 		mappings = {
 			i = {
 				['<esc>'] = actions.close,
@@ -47,4 +66,10 @@ telescope.setup {
 	},
 }
 
+telescope.load_extension('fzf')
 telescope.load_extension('gitmoji')
+end
+
+plugins.config = setup
+
+return plugins

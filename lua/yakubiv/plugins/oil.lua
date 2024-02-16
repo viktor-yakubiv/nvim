@@ -1,9 +1,12 @@
-local oil = require 'oil'
+return {
+	'stevearc/oil.nvim',
+	name = "oil",
 
-oil.setup {
-	default_file_explorer = false,
+	opts = {
+		default_file_explorer = false,
 
-	view_options = {
-		show_hidden = true,
+		view_options = {
+			show_hidden = true,
+		},
 	},
 }

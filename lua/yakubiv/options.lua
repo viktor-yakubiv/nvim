@@ -10,9 +10,6 @@ local options = {
 	softtabstop = 2,
 	shiftwidth = 2,
 
-	number = true,
-	relativenumber = true,
-
 	splitright = true,
 
 	-- Smart search

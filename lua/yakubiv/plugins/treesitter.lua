@@ -1,6 +1,4 @@
-local configs = require 'nvim-treesitter.configs'
-
-configs.setup {
+local treesitter_config = {
 	ensure_installed = {
 		"html",
 		"css",
@@ -14,12 +12,36 @@ configs.setup {
 		"yaml",
 	},
 
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-	},
+	highlight = { enable = true },
+	indent = { enable = true },
+	incremental_selection = { enable = true },
+}
 
-	indend = {
-		enable = true,
-	},
+local treesitter_plugin = {
+	'nvim-treesitter/nvim-treesitter',
+	name = 'treesitter',
+	opts = treesitter_config,
+
+	config = function (self, opts)
+		local configs = require 'nvim-treesitter.configs'
+		configs.setup(opts)
+	end,
+
+	build = function ()
+		local ts_update = require('nvim-treesitter.install').update()
+		ts_update()
+	end,
+}
+
+
+local treesitter_context_plugin = {
+	'nvim-treesitter/nvim-treesitter-context',
+	name = 'treesitter-context',
+	dependencies = 'nvim-treesitter/nvim-treesitter',
+}
+
+
+return {
+	treesitter_plugin,
+	treesitter_context_plugin,
 }

@@ -1,3 +1,22 @@
+local plugin = {
+	'hrsh7th/nvim-cmp',
+	event = { "InsertEnter" },
+	dependencies = {
+		{ 'hrsh7th/cmp-buffer' },
+		{ 'hrsh7th/cmp-path' },
+		{ 'hrsh7th/cmp-cmdline' },
+		{ 'saadparwaiz1/cmp_luasnip' },
+		{ 'hrsh7th/cmp-nvim-lsp' },
+		{ 'hrsh7th/cmp-nvim-lua' },
+		{ 'hrsh7th/cmp-emoji' },
+
+		--- Snippets
+		'L3MON4D3/LuaSnip', -- snippet engine
+		'rafamadriz/friendly-snippets', -- a community-driven set of snippets
+	},
+}
+
+plugin.config = function ()
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
@@ -51,7 +70,7 @@ local kind_icons = {
 --- Mappings
 
 local has_words_before = function()
-	-- Lua 5.3 moved this, Neovim 8.2 has Lua 5.1
+	-- Lua 5.3 moved this, Neovim 9.5 has Lua 5.1
 	local unpack = unpack or table.unpack
 
 	local line_nr, col_nr = unpack(vim.api.nvim_win_get_cursor(0))
@@ -180,3 +199,6 @@ cmp.setup.filetype('norg', {
 		{ name = 'buffer' },
 	}
 })
+end
+
+return plugin
