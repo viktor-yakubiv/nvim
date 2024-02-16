@@ -1,8 +1,6 @@
 local plugins = require 'yakubiv.plugins'
 
 plugins.use {
-	'gpanders/editorconfig.nvim',
-
 	--- Completion
 	{ 'windwp/nvim-autopairs', config = true },
 
