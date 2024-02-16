@@ -125,7 +125,9 @@ local plugin_map = create_index(plugin_list) -- associative table of plugins
 --
 -- disable all plugins unless enabled back
 for _, plugin in ipairs(plugin_list) do
-	plugin.enabled = false
+	if plugin.enabled == nil then
+		plugin.enabled = false
+	end
 end
 
 local function enable_plugin(name)
