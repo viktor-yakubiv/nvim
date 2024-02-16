@@ -1,20 +1,13 @@
 local plugins = require 'yakubiv.plugins'
 
 plugins.use {
-	--- Completion
-	{ 'windwp/nvim-autopairs', config = true },
-
-	-- Editing
-	{
-		'https://github.com/Wansmer/treesj',
-		dependencies = 'nvim-treesitter/nvim-treesitter',
-	},
-
 	--- Syntax
 	'dannywillems/vim-icalendar',
 }
 
 plugins.enable {
+	"autopairs",
+	"treesj",
 	"cmp",
 	"tree",
 	"oil",
