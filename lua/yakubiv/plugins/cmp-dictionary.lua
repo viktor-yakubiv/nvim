@@ -2,6 +2,7 @@ local dict_path = vim.fn.stdpath('data') .. '/dicts/'
 
 return {
 	'uga-rosa/cmp-dictionary',
+	enabled = false,
 	opts = {
 		paths = { dict_path },
 		first_case_insensitive = true,
