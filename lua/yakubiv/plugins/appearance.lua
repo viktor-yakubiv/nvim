@@ -19,4 +19,7 @@ return {
 	-- * Mariana and Brackets, standard dark and light schemes of Sublime Text 4
 	-- * Stim — my own color scheme, Mariana ported to terminal colours
 	{ 'catppuccin/nvim', name = 'catppuccin' },
+
+	-- Other nice looking themes
+	{ "EdenEast/nightfox.nvim", opts = {} }
 }
