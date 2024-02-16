@@ -54,7 +54,10 @@ local function scan_files()
 			if name == nil then
 				break
 			end
-			files[#files + 1] = name
+
+			if name:sub(-4) == ".lua" then
+				files[#files + 1] = name
+			end
 		end
 	end
 
