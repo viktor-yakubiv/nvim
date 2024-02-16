@@ -19,6 +19,10 @@ local lazy = require "lazy"
 local opts = {
 	root = plugins_root,
 
+	-- I don't use multiple computers at the moment,
+	-- keeping lockfile outside of the repository
+	lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
+
 	defaults = {
 		lazy = true,
 	},
