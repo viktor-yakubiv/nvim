@@ -128,11 +128,7 @@ end
 
 local function setup()
 	-- all defined plugins are loaded
-	lazy.setup(plugin_list, {
-		ui = {
-			border = "single",
-		},
-	})
+	lazy.setup(plugin_list)
 end
 
 local M = setmetatable({}, {

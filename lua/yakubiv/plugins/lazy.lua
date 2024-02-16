@@ -1,5 +1,7 @@
 -- Package manager setup — Lazy in my case
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local plugins_root = vim.fn.stdpath("data") .. "/lazy"
+local lazypath = plugins_root .. "/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -13,5 +15,22 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local lazy = require "lazy"
+
+local opts = {
+	root = plugins_root,
+
+	defaults = {
+		lazy = true,
+	},
+
+	ui = {
+		border = "single",
+	},
+}
+
+local setup = lazy.setup
+lazy.setup = function (spec)
+	setup(spec, opts)
+end
 
 return lazy
