@@ -84,15 +84,14 @@ if telescope_loaded then
 	-- end
 end
 
-local treesj_loaded, treesj = pcall(require, 'treesj')
-if treesj_loaded then
-	keymap { "<leader>m", treesj.toggle }
-end
 
-local oil_loaded, oil = pcall(require, "oil")
-if oil_loaded then
-	keymap { "-", oil.open }
+local plugins = require "yakubiv.plugins"
 
-	local function oil_cwd() oil.open(vim.fn.getcwd()) end
-	keymap { "<leader>-", oil_cwd }
-end
+plugins.oil.keys = {
+	{ "-", "<cmd>Oil<cr>" },
+	{ "<leader>-", function() require("oil").open(vim.fn.getcwd()) end },
+}
+
+plugins.treesj.keys = {
+	{ "<leader>m", function() require("treesj").toggle() end }
+}
