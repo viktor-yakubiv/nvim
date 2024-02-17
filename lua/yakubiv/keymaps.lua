@@ -96,6 +96,13 @@ plugins.treesj.keys = {
 	{ "<leader>m", function() require("treesj").toggle() end }
 }
 
+plugins.neotree.keys = {
+	{ "\\", "<cmd>Neotree focus<cr>" },
+	{ "\\r", "<cmd>Neotree reveal<cr>" },
+	{ "\\g", "<cmd>Neotree git_status<cr>" },
+	{ "\\b", "<cmd>Neotree buffers<cr>" },
+}
+
 plugins.neogit.keys = {
 	{
 		"<leader>gs",
