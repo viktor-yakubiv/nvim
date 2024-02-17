@@ -20,6 +20,9 @@ return {
 	-- * Stim — my own color scheme, Mariana ported to terminal colours
 	{ 'catppuccin/nvim', name = 'catppuccin', opts = {} },
 
+	-- File icons that many plugins use, e.g. nvim-tree.lua, neo-tree, telescope
+	{ 'nvim-tree/nvim-web-devicons', opts = {}, lazy = true },
+
 	-- Other nice looking themes
 	{ "EdenEast/nightfox.nvim", opts = {} }
 }

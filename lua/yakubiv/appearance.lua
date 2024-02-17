@@ -34,3 +34,7 @@ plugins.catppuccin.opts = {
 plugins.catppuccin.init = function()
 	vim.cmd.colorscheme 'catppuccin'
 end
+
+plugins.web_devicons.opts = {
+	color_icons = false,
+}
