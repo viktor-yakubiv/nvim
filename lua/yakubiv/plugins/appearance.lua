@@ -1,4 +1,11 @@
 return {
+	-- Catppuccin is my primary color scheme currently.
+	-- Previously, I have used (in chronological order):
+	-- * Monokai Pro
+	-- * Mariana and Brackets, standard dark and light schemes of Sublime Text 4
+	-- * Stim — my own color scheme, Mariana ported to terminal colours
+	{ 'catppuccin/nvim', name = 'catppuccin', opts = {} },
+
 	-- Automatic system appearance detection
 	-- For some reason Neovim does not pick it properly from the terminal
 	{ 'f-person/auto-dark-mode.nvim', opts = {}, lazy = false },
@@ -12,13 +19,6 @@ return {
 		event = "BufEnter",
 		opts = {},
 	},
-
-	-- Catppuccin is my primary color scheme currently.
-	-- Previously, I have used (in chronological order):
-	-- * Monokai Pro
-	-- * Mariana and Brackets, standard dark and light schemes of Sublime Text 4
-	-- * Stim — my own color scheme, Mariana ported to terminal colours
-	{ 'catppuccin/nvim', name = 'catppuccin', opts = {} },
 
 	-- File icons that many plugins use, e.g. nvim-tree.lua, neo-tree, telescope
 	{ 'nvim-tree/nvim-web-devicons', opts = {}, lazy = true },
