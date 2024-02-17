@@ -110,7 +110,7 @@ local function create_index(config)
 		end
 	end
 
-	-- in case of collision, plugins override dependencies
+	-- in case of collision, parent plugins override dependencies
 	for _, plugin in ipairs(specs) do
 		plugin_map[plugin.name:gsub("%W+", "_")] = plugin
 	end
@@ -118,15 +118,38 @@ local function create_index(config)
 	return plugin_map
 end
 
+local function deduplicate_definitions(list, map)
+	for index, plugin in ipairs(list) do
+		local name = plugin.name or get_pretty_name(plugin[1])
+		local key = name:gsub("%W+", "_")
+		list[index] = map[key]
+	end
+
+	for _, plugin in ipairs(list) do
+		if plugin.dependencies ~= nil then
+			deduplicate_definitions(plugin.dependencies, map)
+		end
+	end
+end
+
 local plugin_files = filter_files(scan_files(), excluded_files)
 
 local plugin_list = normalize(load_configs(plugin_files))
 local plugin_map = create_index(plugin_list) -- associative table of plugins
---
--- disable all plugins unless enabled back
+
+-- wiring same options object into all duplicated dependencies
+deduplicate_definitions(plugin_list, plugin_map)
+
+-- disable all plugins unless enabled back or dependency
 for _, plugin in ipairs(plugin_list) do
 	if plugin.enabled == nil then
 		plugin.enabled = false
+	end
+end
+for _, plugin in ipairs(plugin_list) do
+	-- shallow, should be deep recursive
+	for _, dependency in ipairs(plugin.dependencies or {}) do
+		dependency.enabled = nil
 	end
 end
 
