@@ -37,6 +37,7 @@ end
 
 plugins.web_devicons.opts = {
 	color_icons = false,
+	default = true,
 }
 
 plugins.neogit.opts = {
