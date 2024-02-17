@@ -4,6 +4,7 @@ local plugin = { -- enable LSP
 		'williamboman/mason.nvim', -- language servers package manager
 		'williamboman/mason-lspconfig.nvim',
 	},
+	lazy = false,
 }
 
 plugin.config = function()
