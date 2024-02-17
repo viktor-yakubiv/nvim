@@ -38,3 +38,12 @@ end
 plugins.web_devicons.opts = {
 	color_icons = false,
 }
+
+plugins.neogit.opts = {
+	graph_style = "unicode",
+	signs = {
+		-- { CLOSED, OPENED }
+		section = { "", "" },
+		item = { "", "" },
+	},
+}

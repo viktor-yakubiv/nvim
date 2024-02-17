@@ -16,6 +16,7 @@ plugins.enable {
 	"treesitter",
 	"telescope",
 	"which_key",
+	"neogit",
 }
 
 require 'yakubiv.options'

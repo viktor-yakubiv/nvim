@@ -95,3 +95,11 @@ plugins.oil.keys = {
 plugins.treesj.keys = {
 	{ "<leader>m", function() require("treesj").toggle() end }
 }
+
+plugins.neogit.keys = {
+	{
+		"<leader>gs",
+		function() require("neogit").open() end,
+		desc = "Git status",
+	},
+}
