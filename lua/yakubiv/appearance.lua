@@ -24,8 +24,6 @@ plugins.enable {
 	"catppuccin",
 }
 
--- Higher priority for Lualine to make the colorscheme apply to it too
-
 plugins.catppuccin.lazy = false
 plugins.catppuccin.priority = 1000
 plugins.catppuccin.opts = {
