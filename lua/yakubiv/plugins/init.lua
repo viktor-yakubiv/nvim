@@ -3,6 +3,10 @@ local lazy = require 'yakubiv.plugins.lazy'
 -- prefix for the require() call with plugin configurations
 local package_prefix = "yakubiv.plugins."
 
+local plugin_list = {}
+local plugin_map = {}
+
+
 -- Other files in the ./plugins directory are plugin definitions
 local excluded_files = {
 	"init.lua",  -- current file
@@ -100,45 +104,49 @@ local function load_configs(files)
 	return loaded_configs
 end
 
-local function create_index(config)
-	local plugin_map = {}
-	local specs = normalize(config)
-
-	for _, plugin in ipairs(specs) do
-		for name, dep in pairs(create_index(plugin.dependencies or {})) do
-			plugin_map[name] = dep
-		end
-	end
-
-	-- in case of collision, parent plugins override dependencies
-	for _, plugin in ipairs(specs) do
-		plugin_map[plugin.name:gsub("%W+", "_")] = plugin
-	end
-
-	return plugin_map
-end
-
-local function deduplicate_definitions(list, map)
-	for index, plugin in ipairs(list) do
-		local name = plugin.name or get_pretty_name(plugin[1])
-		local key = name:gsub("%W+", "_")
-		list[index] = map[key]
-	end
-
-	for _, plugin in ipairs(list) do
-		if plugin.dependencies ~= nil then
-			deduplicate_definitions(plugin.dependencies, map)
-		end
+local function extend(spec, extension)
+	local extended = vim.tbl_deep_extend("force", spec, extension)
+	for key, value in pairs(extended) do
+		spec[key] = value
 	end
 end
 
-local plugin_files = filter_files(scan_files(), excluded_files)
+local function attach_methods(plugin)
+	plugin.extend = extend
+end
 
-local plugin_list = normalize(load_configs(plugin_files))
-local plugin_map = create_index(plugin_list) -- associative table of plugins
+local function add(spec, level)
+	spec.name = spec.name or get_pretty_name(spec[1])
+	local key = spec.name:gsub("%W+", "_")
+	plugin_map[key] = vim.tbl_deep_extend("force", plugin_map[key] or {}, spec)
 
--- wiring same options object into all duplicated dependencies
-deduplicate_definitions(plugin_list, plugin_map)
+	attach_methods(plugin_map[key])
+
+	local replaced = false
+	for index, plugin in ipairs(plugin_list) do
+		if plugin[1] == spec[1] then
+			plugin_list[index] = plugin_map[key]
+			replaced = true
+			break
+		end
+	end
+
+	if not replaced and not level then
+		plugin_list[#plugin_list+1] = plugin_map[key]
+	end
+
+	for _, dep in ipairs(plugin_map[key].dependencies or {}) do
+		add(dep, (level or 0) + 1)
+	end
+end
+
+local function autoload()
+	local plugin_files = filter_files(scan_files(), excluded_files)
+	local plugin_list = normalize(load_configs(plugin_files))
+	for _, plugin in ipairs(plugin_list) do
+		add(plugin)
+	end
+end
 
 local function complete_setup()
 	-- all defined plugins are loaded
@@ -151,10 +159,16 @@ local M = setmetatable({}, {
 	end,
 })
 
-M.plugins = plugin_list
-M.enable = enable_plugin
+M.autoload = autoload
+
+M.enable = function () end
 M.load = complete_setup
 M.enable = function () end
-M.use = function () end
+M.use = function (spec)
+	local list = normalize(spec)
+	for _, plugin in ipairs(list) do
+		add(plugin)
+	end
+end
 
 return M
