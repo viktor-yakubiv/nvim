@@ -23,14 +23,6 @@ local opts = {
 	-- keeping lockfile outside of the repository
 	lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
 
-	defaults = {
-		lazy = true,
-
-		cond = function (plugin)
-			return plugin.enable ~= true
-		end,
-	},
-
 	ui = {
 		border = "single",
 	},

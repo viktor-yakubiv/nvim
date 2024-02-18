@@ -140,30 +140,6 @@ local plugin_map = create_index(plugin_list) -- associative table of plugins
 -- wiring same options object into all duplicated dependencies
 deduplicate_definitions(plugin_list, plugin_map)
 
--- disable all plugins unless enabled back or dependency
-for _, plugin in ipairs(plugin_list) do
-	if plugin.enabled == nil then
-		plugin.enabled = false
-	end
-end
-for _, plugin in ipairs(plugin_list) do
-	-- shallow, should be deep recursive
-	for _, dependency in ipairs(plugin.dependencies or {}) do
-		dependency.enabled = nil
-	end
-end
-
-local function enable_plugin(name)
-	if type(name) == "string" then
-		plugin_map[name:gsub("-", "_")].enabled = true
-		return
-	end
-
-	for _, n in ipairs(name) do
-		enable_plugin(n)
-	end
-end
-
 local function complete_setup()
 	-- all defined plugins are loaded
 	lazy.setup(plugin_list)
@@ -178,6 +154,7 @@ local M = setmetatable({}, {
 M.plugins = plugin_list
 M.enable = enable_plugin
 M.load = complete_setup
+M.enable = function () end
 M.use = function () end
 
 return M
