@@ -161,9 +161,7 @@ local M = setmetatable({}, {
 
 M.autoload = autoload
 
-M.enable = function () end
 M.load = complete_setup
-M.enable = function () end
 M.use = function (spec)
 	local list = normalize(spec)
 	for _, plugin in ipairs(list) do
