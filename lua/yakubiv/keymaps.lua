@@ -1,3 +1,5 @@
+local plugins = require "yakubiv.plugins"
+
 local function keymap(conf)
 	local lhs, rhs = unpack(conf)
 	local mode = conf.mode or "n"
@@ -63,29 +65,21 @@ keymap { "<S-h>", ":bprevious<CR>" }
 
 keymap { mode = "v", "p", '"_dP' } -- discard replaced text
 
-local telescope_loaded, telescope = pcall(require, 'yakubiv.plugins.telescope')
-if telescope_loaded then
-	local builtin = require 'telescope.builtin'
-	telescope.keys = {
-		{ '<leader><leader>', builtin.resume, desc = "Resume previous search" },
-		{ '<leader>ff', builtin.find_files, desc = "Find files" },
-		{ '<leader>gf', builtin.git_files, desc = "Git files" },
-		{ '<leader>fg', builtin.live_grep, desc = "Live grep" },
-		{ '<leader>fb', builtin.buffers, desc = "Buffers" },
-		{ '<leader>fh', builtin.help_tags, desc = "Help tags" },
-		{
-			'<leader>ge',
-			function () require('telescope').extensions.gitmoji.gitmoji() end,
-			desc = "Gitmoji",
-		}
+-- plugin is lazy loaded even if a file within is loaded
+local telescope = require 'telescope.builtin'
+plugins.telescope.keys = {
+	{ '<leader><leader>', telescope.resume, desc = "Resume previous search" },
+	{ '<leader>ff', telescope.find_files, desc = "Find files" },
+	{ '<leader>gf', telescope.git_files, desc = "Git files" },
+	{ '<leader>fg', telescope.live_grep, desc = "Live grep" },
+	{ '<leader>fb', telescope.buffers, desc = "Buffers" },
+	{ '<leader>fh', telescope.help_tags, desc = "Help tags" },
+	{
+		'<leader>ge',
+		function () require('telescope').extensions.gitmoji.gitmoji() end,
+		desc = "Gitmoji",
 	}
-	-- if telescope.extensions.gitmoji then
-	-- 	keymap('n', '<leader>ge', telescope.extensions.gitmoji.gitmoji)
-	-- end
-end
-
-
-local plugins = require "yakubiv.plugins"
+}
 
 plugins.oil.keys = {
 	{ "-", "<cmd>Oil<cr>" },
