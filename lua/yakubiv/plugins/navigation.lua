@@ -24,6 +24,7 @@ return {
 			"MunifTanjim/nui.nvim",
 		},
 		opts = {},
+		enabled = false,
 	},
 }
 
