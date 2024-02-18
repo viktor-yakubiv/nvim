@@ -113,6 +113,9 @@ end
 
 local function attach_methods(plugin)
 	plugin.extend = extend
+	plugin.setup = function (opts)
+		plugin.opts = vim.tbl_deep_extend("force", plugin.opts or {}, opts)
+	end
 end
 
 local function add(spec, level)
