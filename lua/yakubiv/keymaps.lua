@@ -87,18 +87,18 @@ plugins.oil.keys = {
 }
 
 plugins.treesj.keys = {
-	{ "<leader>m", function() require("treesj").toggle() end }
+	{ "<localleader>m", function() require("treesj").toggle() end, desc = "Toggle split/join" }
 }
 
 plugins.neotree.keys = {
-	{ "\\", "<cmd>Neotree focus<cr>" },
+	{ "\\",  "<cmd>Neotree focus<cr>" },
 	{ "\\r", "<cmd>Neotree reveal<cr>" },
 	{ "\\g", "<cmd>Neotree git_status<cr>" },
 	{ "\\b", "<cmd>Neotree buffers<cr>" },
 } and {} -- effectively disabling keys
 
 plugins.tree.keys = {
-	{ "\\", "<cmd>NvimTreeOpen<cr>" },
+	{ "\\",  "<cmd>NvimTreeOpen<cr>" },
 	{ "\\r", "<cmd>NvimTreeFindFile<cr>" },
 }
 
@@ -108,4 +108,46 @@ plugins.neogit.keys = {
 		function() require("neogit").open() end,
 		desc = "Git status",
 	},
+}
+
+plugins.gitsigns.setup {
+	on_attach = function(bufnr)
+		local gs = package.loaded.gitsigns
+
+		local function navigator(keystroke, action)
+			return function()
+				if vim.wo.diff then return keystroke end
+				vim.schedule(function() action() end)
+				return '<Ignore>'
+			end
+		end
+
+		local maps = {
+			-- Navigation
+			{ "]c", navigator("]c", gs.next_hunk), expr = true, desc = "Next hunk" },
+			{ "[c", navigator("[c", gs.prev_hunk), expr = true, desc = "Previous hunk" },
+
+			-- Actions
+			{ "<localleader>hs", gs.stage_hunk, desc = "Stage hunk" },
+			{ "<localleader>hr", gs.reset_hunk, desc = "Reset hunk" },
+			{ "<localleader>hs", function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end, mode = "v", desc = "Stage hunk" },
+			{ "<localleader>hr", function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end, mode = "v", desc = "Reset hunk" },
+			{ "<localleader>hS", gs.stage_buffer, desc = "Stage buffer" },
+			{ "<localleader>hu", gs.undo_stage_hunk, desc = "Undo hunk staging" },
+			{ "<localleader>hR", gs.reset_buffer, desc = "Reset buffer" },
+			{ "<localleader>hp", gs.preview_hunk, desc = "Preview hunk" },
+			{ "<localleader>hb", function() gs.blame_line { full = true } end, desc = "Blame line" },
+			{ "<localleader>tb", gs.toggle_current_line_blame, desc = "Toggle current line blame" },
+			{ "<localleader>hd", gs.diffthis, desc = "Diff this" },
+			{ "<localleader>hD", function() gs.diffthis("~") end, desc = "Diff ~" },
+			{ "<localleader>td", gs.toggle_deleted, desc = "Toggle deleted hunks" },
+
+			-- Text object
+			{ "ih", ":<C-U>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "inner hunk" },
+		}
+
+		for _, map in ipairs(maps) do
+			keymap(vim.tbl_extend("force", { buffer = bufnr }, map))
+		end
+	end
 }
