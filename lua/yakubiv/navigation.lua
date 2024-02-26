@@ -15,3 +15,10 @@ plugins.tree.setup {
 		},
 	},
 }
+
+plugins.neotree.setup {
+	window = {
+		-- position = "current", -- replace the current buffer like Netrw
+		position = "float",
+	},
+}

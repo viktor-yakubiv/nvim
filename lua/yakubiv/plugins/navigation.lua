@@ -12,6 +12,7 @@ return {
 				},
 			},
 		},
+		enabled = false,
 	},
 
 	{
@@ -23,7 +24,26 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
-		opts = {},
-		enabled = false,
+		cmd = "Neotree",
+		opts = {
+			filesystem = {
+				hijack_netrw_behavior = "disabled", -- is not default file browser
+				use_libuv_file_wathcer = true, -- should improve performance
+				filtered_items = {
+					never_show = { ".DS_Store" },
+				},
+
+				follow_current_file = {
+					enabled = true,
+				},
+			},
+			window = {
+				mappings = {
+					-- consistency with Nvim-tree — I've got used to it
+					["<space>"] = nil,
+					["<tab>"] = "toggle_node",
+				},
+			},
+		},
 	},
 }

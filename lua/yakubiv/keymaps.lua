@@ -95,12 +95,12 @@ plugins.neotree.keys = {
 	{ "\\r", "<cmd>Neotree reveal<cr>" },
 	{ "\\g", "<cmd>Neotree git_status<cr>" },
 	{ "\\b", "<cmd>Neotree buffers<cr>" },
-} and {} -- effectively disabling keys
+}
 
 plugins.tree.keys = {
 	{ "\\",  "<cmd>NvimTreeOpen<cr>" },
 	{ "\\r", "<cmd>NvimTreeFindFile<cr>" },
-}
+} and {} -- effectively disabling keys
 
 plugins.neogit.keys = {
 	{
