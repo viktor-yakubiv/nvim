@@ -151,3 +151,8 @@ plugins.gitsigns.setup {
 		end
 	end
 }
+
+plugins.neorg.keys = {
+	{ "<leader>nn", "<cmd>Neorg workspace notes<cr>", desc = "View notes" },
+	{ "<leader>nr", "<cmd>Neorg return<cr>", desc = "Return from notes" },
+}

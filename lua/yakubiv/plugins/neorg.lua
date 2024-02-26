@@ -6,6 +6,7 @@ return {
 	},
 	ft = { "norg" },
 	build = ':Neorg sync-parsers',
+	cmd = "Neorg",
 	opts = {
 		load = {
 			-- Loads default behaviour
@@ -32,14 +33,24 @@ return {
 			},
 
 			-- Manages Neorg workspaces
-			-- 	["core.dirman"] = {
-			-- 		config = {},
-			-- 	},
+			["core.dirman"] = {
+				config = {
+					workspaces = {
+						notes = "~/Notes",
+					},
+				},
+			},
 
 			["core.completion"] = { -- does not work 🤔
 				config = {
 					engine = 'nvim-cmp',
 					name = 'norg',
+				},
+			},
+
+			["core.journal"] = {
+				config = {
+					strategy = "flat",
 				},
 			},
 		},
