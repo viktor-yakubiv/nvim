@@ -151,3 +151,19 @@ plugins.gitsigns.setup {
 		end
 	end
 }
+
+local harpoon = function() return require "harpoon" end
+plugins.harpoon.keys = {
+	{ "<leader>a", function() harpoon():list():append() end, desc = "Harpoon file" },
+	{ "<leader>fl", function() harpoon().ui:toggle_quick_menu(harpoon():list()) end, desc = "Harpooned file list" },
+	{ "C-`", function() harpoon().ui:toggle_quick_menu(harpoon():list()) end, desc = "Harpooned file list" },
+	{"<C-1>", function() harpoon():list():select(1) end },
+	{"<C-2>", function() harpoon():list():select(2) end },
+	{"<C-3>", function() harpoon():list():select(3) end },
+	{"<C-4>", function() harpoon():list():select(4) end },
+	{"<C-5>", function() harpoon():list():select(5) end },
+
+	-- Toggle previous & next buffers stored within Harpoon list
+	{"<C-S-k>", function() harpoon():list():prev() end },
+	{"<C-S-j>", function() harpoon():list():next() end },
+}
