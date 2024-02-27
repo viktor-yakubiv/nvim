@@ -65,15 +65,13 @@ keymap { "<S-h>", ":bprevious<CR>" }
 
 keymap { mode = "v", "p", '"_dP' } -- discard replaced text
 
--- plugin is lazy loaded even if a file within is loaded
-local telescope = require 'telescope.builtin'
 plugins.telescope.keys = {
-	{ '<leader><leader>', telescope.resume, desc = "Resume previous search" },
-	{ '<leader>ff', telescope.find_files, desc = "Find files" },
-	{ '<leader>gf', telescope.git_files, desc = "Git files" },
-	{ '<leader>fg', telescope.live_grep, desc = "Live grep" },
-	{ '<leader>fb', telescope.buffers, desc = "Buffers" },
-	{ '<leader>fh', telescope.help_tags, desc = "Help tags" },
+	{ '<leader><leader>', function() require("telescope.builtin").resume() end, desc = "Resume previous search" },
+	{ '<leader>ff', function() require("telescope.builtin").find_files() end, desc = "Find files" },
+	{ '<leader>gf', function() require("telescope.builtin").git_files() end, desc = "Git files" },
+	{ '<leader>fg', function() require("telescope.builtin").live_grep() end, desc = "Live grep" },
+	{ '<leader>fb', function() require("telescope.builtin").buffers() end, desc = "Buffers" },
+	{ '<leader>fh', function() require("telescope.builtin").help_tags() end, desc = "Help tags" },
 	{
 		'<leader>ge',
 		function () require('telescope').extensions.gitmoji.gitmoji() end,
