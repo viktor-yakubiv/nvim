@@ -6,5 +6,6 @@ require 'yakubiv.appearance'
 require 'yakubiv.syntax'
 require 'yakubiv.keymaps'
 require 'yakubiv.navigation'
+require 'yakubiv.editing'
 
 plugins.load()
