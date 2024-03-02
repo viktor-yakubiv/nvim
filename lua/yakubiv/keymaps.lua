@@ -66,17 +66,16 @@ keymap { "<S-h>", ":bprevious<CR>" }
 keymap { mode = "v", "p", '"_dP' } -- discard replaced text
 
 plugins.telescope.keys = {
-	{ '<leader><leader>', function() require("telescope.builtin").resume() end, desc = "Resume previous search" },
-	{ '<leader>ff', function() require("telescope.builtin").find_files() end, desc = "Find files" },
-	{ '<leader>gf', function() require("telescope.builtin").git_files() end, desc = "Git files" },
-	{ '<leader>fg', function() require("telescope.builtin").live_grep() end, desc = "Live grep" },
-	{ '<leader>fb', function() require("telescope.builtin").buffers() end, desc = "Buffers" },
-	{ '<leader>fh', function() require("telescope.builtin").help_tags() end, desc = "Help tags" },
-	{
-		'<leader>ge',
-		function () require('telescope').extensions.gitmoji.gitmoji() end,
-		desc = "Gitmoji",
-	}
+	{ '<leader><space>', "<cmd>Telescope resume<cr>", desc = "Resume previous" },
+	{ '<leader>ff', "<cmd>Telescope find_files<cr>", desc = "Find files" },
+	{ '<leader>gf', "<cmd>Telescope git_files<cr>", desc = "Git files" },
+	{ '<leader>fg', "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+	{ '<leader>fb', "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+	{ '<leader>fh', "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
+}
+
+plugins.telescope_gitmoji.keys = {
+	{ '<leader>ge', '<cmd>Telescope gitmoji<cr>', desc = "Gitmoji" },
 }
 
 plugins.oil.keys = {

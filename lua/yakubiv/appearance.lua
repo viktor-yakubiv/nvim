@@ -34,3 +34,10 @@ plugins.neogit.opts = {
 		item = { "", "" },
 	},
 }
+
+plugins.telescope.setup {
+	defaults = {
+		prompt_prefix = ' 󰍉  ',
+		selection_caret = ' ',
+	},
+}
