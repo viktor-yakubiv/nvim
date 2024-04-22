@@ -4,6 +4,7 @@ plugins.autoload()
 require 'yakubiv.options'
 require 'yakubiv.appearance'
 require 'yakubiv.syntax'
+require 'yakubiv.languages'
 require 'yakubiv.keymaps'
 require 'yakubiv.navigation'
 require 'yakubiv.editing'
