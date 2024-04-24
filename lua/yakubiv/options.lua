@@ -55,3 +55,25 @@ vim.opt.wildignore:append {
 }
 
 vim.opt.wildignorecase = true  -- ignore file and dir name cases in cmd-completion
+
+-- Lang mapping does not work with key bindings
+--
+-- Related issues:
+-- https://github.com/neovim/neovim/issues/27776
+-- https://github.com/vim/vim/issues/297
+local specials = { ";", ',', '"', '|', "\\" }
+local function escape(char)
+	if vim.tbl_contains(specials, char) then
+		return "\\" .. char
+	end
+	return char
+end
+
+local keymap = require "yakubiv.ukrainian-jcukenmac"
+local langmap = {}
+for target_char, source_char in pairs(keymap) do
+	langmap[#langmap + 1] = escape(source_char) .. escape(target_char)
+end
+
+vim.opt.langmap = langmap
+vim.opt.langremap = false
