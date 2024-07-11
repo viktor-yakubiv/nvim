@@ -137,7 +137,21 @@ end
 
 cmp.setup {
 	snippet = snippet,
-	mapping = mapping,
+	mapping = cmp.mapping.preset.insert {
+		["<C-y>"] = cmp.mapping.confirm { select = true },
+
+		["<C-l>"] = cmp.mapping(function()
+			if luasnip.expand_or_locally_jumpable() then
+				luasnip.expand_or_jump()
+			end
+		end, { 'i', 's' }),
+
+		["<C-h>"] = cmp.mapping(function()
+			if luasnip.locally_jumpable(-1) then
+				luasnip.jump(-1)
+			end
+		end, { 'i', 's' }),
+	},
 
 	formatting = {
 		fields = { 'kind', 'abbr' },
@@ -154,7 +168,7 @@ cmp.setup {
 
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
-		select = false,
+		select = true,
 	},
 
 	window = {
