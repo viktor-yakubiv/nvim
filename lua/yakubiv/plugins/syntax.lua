@@ -2,6 +2,7 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter',
 		name = 'treesitter',
+
 		opts = {},
 
 		config = function (self, opts)
@@ -18,6 +19,7 @@ return {
 		'nvim-treesitter/nvim-treesitter-context',
 		name = 'treesitter-context',
 		dependencies = 'nvim-treesitter/nvim-treesitter',
+		event = "BufEnter",
 	},
 
 	-- I edit iCalendar files sometimes

@@ -46,4 +46,14 @@ return {
 			},
 		},
 	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		event = "BufEnter",
+		opts = {},
+		config = function (self, opts)
+			require'nvim-treesitter.configs'.setup { textobjects = opts }
+		end
+	},
 }
