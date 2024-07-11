@@ -65,6 +65,11 @@ keymap { "<S-h>", ":bprevious<CR>" }
 
 keymap { mode = "v", "p", '"_dP' } -- discard replaced text
 
+-- UI commands
+keymap { "<D-s>", "<cmd>write<cr>", mode = "" }
+keymap { "<D-S-s>", "<cmd>writeall<cr>", mode = "" }
+keymap { "<D-q>", "<cmd>quit<cr>", mode = "" }
+
 plugins.telescope.keys = {
 	{ '<leader>fr', "<cmd>Telescope resume<cr>", desc = "Resume previous" },
 	{ '<leader>ff', "<cmd>Telescope find_files<cr>", desc = "Find files" },
