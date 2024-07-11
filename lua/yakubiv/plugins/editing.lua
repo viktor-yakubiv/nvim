@@ -18,7 +18,8 @@ return {
 	{
 		'numToStr/Comment.nvim',
 		name = "comment",
-		event = "InsertEnter",
+		event = "VeryLazy",
+		keys = { "gc", "gb" },
 		opts = {},
 	},
 
