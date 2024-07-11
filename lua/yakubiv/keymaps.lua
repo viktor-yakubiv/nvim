@@ -48,10 +48,10 @@ keymap { "<leader>lq", diagnostic.setloclist }
 
 -- Navigayion by pages with screen centered
 -- Thanks to @ThePrimagen for sharing this nice hack
-keymap { "<C-f>", "<C-f>z." }
-keymap { "<C-d>", "<C-d>z." }
-keymap { "<C-b>", "<C-b>z." }
-keymap { "<C-u>", "<C-u>z." }
+keymap { "<C-f>", "<C-f>zz" }
+keymap { "<C-d>", "<C-d>zz" }
+keymap { "<C-b>", "<C-b>zz" }
+keymap { "<C-u>", "<C-u>zz" }
 
 -- Better window navigation
 keymap { "<C-h>", "<C-w>h" }
