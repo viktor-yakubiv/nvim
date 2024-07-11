@@ -1,11 +1,10 @@
 return {
 	'nvim-neorg/neorg',
 	dependencies = {
-		'nvim-lua/plenary.nvim',
+		{ "vhyrro/luarocks.nvim", opts = {} },
 		'hrsh7th/nvim-cmp',
 	},
 	ft = { "norg" },
-	build = ':Neorg sync-parsers',
 	cmd = "Neorg",
 	opts = {
 		load = {
@@ -53,6 +52,10 @@ return {
 					strategy = "flat",
 				},
 			},
+
+			["core.export"] = {
+				config = {},
+			}
 		},
 	},
 }
