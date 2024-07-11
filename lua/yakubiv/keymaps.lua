@@ -66,12 +66,36 @@ keymap { "<S-h>", ":bprevious<CR>" }
 keymap { mode = "v", "p", '"_dP' } -- discard replaced text
 
 plugins.telescope.keys = {
-	{ '<leader><space>', "<cmd>Telescope resume<cr>", desc = "Resume previous" },
+	{ '<leader>fr', "<cmd>Telescope resume<cr>", desc = "Resume previous" },
 	{ '<leader>ff', "<cmd>Telescope find_files<cr>", desc = "Find files" },
-	{ '<leader>gf', "<cmd>Telescope git_files<cr>", desc = "Git files" },
+	{ "<D-p>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
 	{ '<leader>fg', "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+	{ '<leader>gf', "<cmd>Telescope git_files<cr>", desc = "Git files" },
 	{ '<leader>fb', "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 	{ '<leader>fh', "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
+	{ '<leader>fk', "<cmd>Telescope keymaps<cr>", desc = "Find keymaps" },
+	{ '<leader>/', function()
+		require("telescope.builtin").current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+			previewer = false,
+		})
+	end,  desc = 'Fuzzily search in current buffer' },
+	{
+		'<leader>f/',
+		function()
+			require("telescope.builtin").live_grep {
+				grep_open_files = true,
+				prompt_title = 'Live Grep in Open Files',
+			}
+		end,
+		desc = 'Live grep in Open Files',
+	},
+	{
+		'<leader>fn',
+		function()
+			require("telescope.builtin").find_files { cwd = vim.fn.stdpath 'config' }
+		end,
+		desc = 'Find Neovim files',
+	},
 }
 
 plugins.telescope_gitmoji.keys = {
