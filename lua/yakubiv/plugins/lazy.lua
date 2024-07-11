@@ -26,6 +26,11 @@ local opts = {
 	ui = {
 		border = "single",
 	},
+
+	dev = {
+		path = "~/Development",
+		patterns = { "viktor-yakubiv" },
+	},
 }
 
 local setup = lazy.setup
