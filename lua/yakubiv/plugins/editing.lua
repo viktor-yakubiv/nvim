@@ -23,6 +23,12 @@ return {
 		opts = {},
 	},
 
+	-- Formatting for everything
+	{
+		'stevearc/conform.nvim',
+		opts = {},
+	},
+
 	-- Edit directory as a normal buffer
 	-- Handy to use find and replace or commands like `caw`
 	{
