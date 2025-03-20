@@ -6,6 +6,7 @@ plugins.treesitter.setup {
 		"vim",
 		"vimdoc",
 		"lua",
+		"regex", -- required by noice.nvim
 
 		-- Primary languages
 		"html",

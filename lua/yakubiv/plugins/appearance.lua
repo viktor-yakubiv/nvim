@@ -25,9 +25,15 @@ return {
 
 	{
 		"folke/noice.nvim",
+
+		-- looks like noice references itself, so the name cannot be shortened
+		name = "noice.nvim",
+
 		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
+			-- for an unknown reason, these dependencies
+			-- are not lazy-loaded automatically
+			{ "MunifTanjim/nui.nvim", lazy = true },
+			{ "rcarriga/nvim-notify", lazy = true },
 		},
 		event = "VeryLazy",
 		opts = {
@@ -55,7 +61,7 @@ return {
 			},
 		},
 
-		init = function (plugin, opts)
+		config = function (plugin, opts)
 			require("noice").setup(opts)
 
 			require("notify").setup {
