@@ -182,3 +182,22 @@ plugins.neorg.keys = {
 	{ "<leader>nn", "<cmd>Neorg workspace notes<cr>", desc = "View notes" },
 	{ "<leader>nr", "<cmd>Neorg return<cr>", desc = "Return from notes" },
 }
+
+local config_hover = plugins.hover.config or function () end
+plugins.hover:extend {
+	keys = { "K", "gK", "<C-p>", "<C-n>" },
+	event = "VeryLazy", -- for mouse events, could be MouseMove
+	config = function (plugin, opts)
+		config_hover(plugin, opts)
+
+		local hover = require "hover"
+
+		keymap { "K", hover.hover, desc = "hover.nvim" }
+		keymap { "gK", hover.hover_select, desc = "hover.nvim (select)" }
+		keymap { "<C-p>", function() hover.hover_switch("previous") end, desc = "hover.nvim (previous source)"}
+		keymap { "<C-n>", function() hover.hover_switch("next") end, desc = "hover.nvim (next source)"}
+
+		keymap { '<MouseMove>', require("hover").hover_mouse,  desc = "hover.nvim (mouse)" }
+		vim.o.mousemoveevent = true
+	end,
+}
