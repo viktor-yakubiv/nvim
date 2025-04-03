@@ -247,3 +247,9 @@ plugins.hover:extend {
 		keymap { "<C-n>", bind(hover.hover_switch, "next"), desc = "hover.nvim (next source)" }
 	end,
 }
+
+plugins.codecompanion:extend {
+	keys = {
+		{ "<Leader>cc", "<cmd>CodeCompanionChat<cr>" },
+	},
+}
