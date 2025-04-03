@@ -27,7 +27,7 @@ local function normalize(spec)
 
 	if type(spec) == "string" then
 		plugins[#plugins + 1] = { spec, name = get_pretty_name(spec) }
-	elseif type(spec[1]) == "string" and not vim.tbl_islist(spec) then
+	elseif type(spec[1]) == "string" and not vim.islist(spec) then
 		if spec.dependencies ~= nil then
 			spec.dependencies = normalize(spec.dependencies)
 		end
