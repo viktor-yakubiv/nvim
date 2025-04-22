@@ -2,13 +2,8 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter',
 		name = 'treesitter',
-
+		main = 'nvim-treesitter.configs',
 		opts = {},
-
-		config = function (self, opts)
-			local configs = require 'nvim-treesitter.configs'
-			configs.setup(opts)
-		end,
 
 		build = function ()
 			require('nvim-treesitter.install').update({ with_sync = true })()
@@ -21,7 +16,4 @@ return {
 		dependencies = 'nvim-treesitter/nvim-treesitter',
 		event = "BufEnter",
 	},
-
-	-- I edit iCalendar files sometimes
-	{ 'dannywillems/vim-icalendar', name = "icalendar", ft = "icalendar" },
 }

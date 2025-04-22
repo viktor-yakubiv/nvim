@@ -1,6 +1,6 @@
 -- Package manager setup — Lazy in my case
 local plugins_root = vim.fn.stdpath("data") .. "/lazy"
-local lazypath = plugins_root .. "/lazy.nvim"
+local lazypath = plugins_root .. "/lazy"
 
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -33,9 +33,24 @@ local opts = {
 	},
 }
 
-local setup = lazy.setup
-lazy.setup = function (spec)
-	setup(spec, opts)
+
+--- Nice plugin naming
+
+local function clean_name(name)
+	name = name:sub(-4) == "nvim" and name:sub(1, -6) or name
+	name = name:sub(1, 4) == "nvim" and name:sub(6) or name
+	return name:gsub("_", "-")
+end
+
+local plugin_configs = require "yakubiv.plugins"
+
+local lazy_fragments = require "lazy.core.fragments"
+local add_fragment = lazy_fragments.add
+lazy_fragments.add = function (fragments, plugin)
+	local fragment = add_fragment(fragments, plugin)
+	fragment.name = clean_name(fragment.name)
+	fragment.spec = vim.tbl_deep_extend("force", fragment.spec, plugin_configs)
+	return fragment
 end
 
 return lazy

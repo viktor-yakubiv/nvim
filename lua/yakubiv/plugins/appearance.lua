@@ -30,10 +30,8 @@ return {
 		name = "noice.nvim",
 
 		dependencies = {
-			-- for an unknown reason, these dependencies
-			-- are not lazy-loaded automatically
-			{ "MunifTanjim/nui.nvim", lazy = true },
-			{ "rcarriga/nvim-notify", lazy = true },
+			{ "MunifTanjim/nui.nvim" },
+			{ "rcarriga/nvim-notify" },
 		},
 		event = "VeryLazy",
 		opts = {
