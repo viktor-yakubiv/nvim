@@ -1,4 +1,4 @@
--- Package manager setup — Lazy in my case
+--- Package manager setup — Lazy in my case
 local plugins_root = vim.fn.stdpath("data") .. "/lazy"
 local lazypath = plugins_root .. "/lazy"
 
@@ -23,6 +23,10 @@ local opts = {
 	-- keeping lockfile outside of the repository
 	lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
 
+	install = {
+		colorscheme = { "catppuccin", "habamax" },
+	},
+
 	ui = {
 		border = "single",
 	},
@@ -35,7 +39,6 @@ local opts = {
 
 
 --- Nice plugin naming
-
 local function clean_name(name)
 	name = name:sub(-4) == "nvim" and name:sub(1, -6) or name
 	name = name:sub(1, 4) == "nvim" and name:sub(6) or name
@@ -48,8 +51,18 @@ local lazy_fragments = require "lazy.core.fragments"
 local add_fragment = lazy_fragments.add
 lazy_fragments.add = function (fragments, plugin)
 	local fragment = add_fragment(fragments, plugin)
+
+	-- Nicer name
 	fragment.name = clean_name(fragment.name)
-	fragment.spec = vim.tbl_deep_extend("force", fragment.spec, plugin_configs)
+
+	-- Load my distributed config into the plugin spec
+	local key = fragment.name:gsub("-", "_")
+	local external_config = plugin_configs[fragment.name]
+	if fragment.name == 'web-devicons' then
+		vim.print(external_config)
+	end
+	fragment.spec = vim.tbl_deep_extend("force", fragment.spec, external_config)
+
 	return fragment
 end
 
