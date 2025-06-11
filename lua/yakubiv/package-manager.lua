@@ -40,8 +40,18 @@ local opts = {
 
 --- Nice plugin naming
 local function clean_name(name)
-	name = name:sub(-4) == "nvim" and name:sub(1, -6) or name
+	if name == "lazy.nvim" then
+		return name
+	end
+
+	-- remove nvim preffix and suffix
+	name = name:sub(-3) == "nvim" and name:sub(1, -6) or name
 	name = name:sub(1, 4) == "nvim" and name:sub(6) or name
+
+	-- remove vim preffix and suffix
+	name = name:sub(-4) == "vim" and name:sub(1, -5) or name
+	name = name:sub(1, 3) == "vim" and name:sub(5) or name
+
 	return name:gsub("_", "-")
 end
 
@@ -58,9 +68,6 @@ lazy_fragments.add = function (fragments, plugin)
 	-- Load my distributed config into the plugin spec
 	local key = fragment.name:gsub("-", "_")
 	local external_config = plugin_configs[fragment.name]
-	if fragment.name == 'web-devicons' then
-		vim.print(external_config)
-	end
 	fragment.spec = vim.tbl_deep_extend("force", fragment.spec, external_config)
 
 	return fragment
