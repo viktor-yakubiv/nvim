@@ -196,8 +196,5 @@ plugins.hover:extend {
 		keymap { "gK", hover.hover_select, desc = "hover.nvim (select)" }
 		keymap { "<C-p>", function() hover.hover_switch("previous") end, desc = "hover.nvim (previous source)"}
 		keymap { "<C-n>", function() hover.hover_switch("next") end, desc = "hover.nvim (next source)"}
-
-		keymap { '<MouseMove>', require("hover").hover_mouse,  desc = "hover.nvim (mouse)" }
-		vim.o.mousemoveevent = true
 	end,
 }

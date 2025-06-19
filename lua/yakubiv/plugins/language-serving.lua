@@ -31,12 +31,6 @@ return {
 				require('hover.providers.man')
 				-- require('hover.providers.fold_preview')
 			end,
-			mouse_delay = 3000
 		},
-
-		config = function (plugin, opts)
-			require("hover").setup(opts)
-			vim.o.mousemoveevent = true
-		end,
 	},
 }
