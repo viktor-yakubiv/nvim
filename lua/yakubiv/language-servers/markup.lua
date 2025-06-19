@@ -15,5 +15,5 @@ lsp.html.setup {
 }
 
 lsp.ltex.setup {
-	language = 'en-GB',
+	language = "en-GB",
 }

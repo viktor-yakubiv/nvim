@@ -1,4 +1,4 @@
-local plugins = require 'yakubiv.plugins'
+local plugins = require "yakubiv.plugins"
 
 -- Enabling line numbering
 -- and making it relative for easier navigation
@@ -17,7 +17,7 @@ plugins.catppuccin:extend {
 	},
 
 	init = function()
-		vim.cmd.colorscheme 'catppuccin'
+		vim.cmd.colorscheme "catppuccin"
 	end,
 }
 
@@ -37,7 +37,7 @@ plugins.neogit.setup {
 
 plugins.telescope.setup {
 	defaults = {
-		prompt_prefix = ' 󰍉  ',
-		selection_caret = ' ',
+		prompt_prefix = " 󰍉  ",
+		selection_caret = " ",
 	},
 }

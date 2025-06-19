@@ -4,24 +4,24 @@ return {
 	-- * Monokai Pro
 	-- * Mariana and Brackets, standard dark and light schemes of Sublime Text 4
 	-- * Stim — my own color scheme, Mariana ported to terminal colours
-	{ 'catppuccin/nvim', name = 'catppuccin', opts = {} },
+	{ "catppuccin/nvim", name = "catppuccin", opts = {} },
 
 	-- Automatic system appearance detection
 	-- For some reason Neovim does not pick it properly from the terminal
-	{ 'f-person/auto-dark-mode.nvim', opts = {}, lazy = false },
+	{ "f-person/auto-dark-mode.nvim", opts = {}, lazy = false },
 
 	-- Better status line
-	{ 'nvim-lualine/lualine.nvim', opts = {}, lazy = false },
+	{ "nvim-lualine/lualine.nvim", opts = {}, lazy = false },
 
 	-- Indicate line changes next to the number
 	{
-		'lewis6991/gitsigns.nvim',
+		"lewis6991/gitsigns.nvim",
 		event = "BufEnter",
 		opts = {},
 	},
 
 	-- File icons that many plugins use, e.g. nvim-tree.lua, neo-tree, telescope
-	{ 'nvim-tree/nvim-web-devicons', opts = {}, lazy = true },
+	{ "nvim-tree/nvim-web-devicons", opts = {}, lazy = true },
 
 	{
 		"folke/noice.nvim",
@@ -55,7 +55,7 @@ return {
 			},
 		},
 
-		config = function (plugin, opts)
+		config = function(plugin, opts)
 			require("noice").setup(opts)
 
 			require("notify").setup {
@@ -66,7 +66,7 @@ return {
 				-- based on the current vim.opt.background
 				-- but for the sake of simplicity I don't care —
 				-- I need to remove annoying message
-				background_colour = "#000000"
+				background_colour = "#000000",
 			}
 		end,
 	},

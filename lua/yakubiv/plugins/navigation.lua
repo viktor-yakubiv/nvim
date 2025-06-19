@@ -1,6 +1,6 @@
 return {
 	{
-		'nvim-tree/nvim-tree.lua',
+		"nvim-tree/nvim-tree.lua",
 		name = "tree",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
@@ -52,8 +52,8 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		event = "BufEnter",
 		opts = {},
-		config = function (self, opts)
-			require'nvim-treesitter.configs'.setup { textobjects = opts }
-		end
+		config = function(self, opts)
+			require("nvim-treesitter.configs").setup { textobjects = opts }
+		end,
 	},
 }

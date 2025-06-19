@@ -9,7 +9,7 @@ end
 
 local function attach_methods(spec)
 	spec.extend = extend
-	spec.setup = function (opts)
+	spec.setup = function(opts)
 		spec.opts = vim.tbl_deep_extend("force", spec.opts or {}, opts)
 	end
 end

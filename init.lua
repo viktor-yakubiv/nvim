@@ -1,1 +1,1 @@
-require 'yakubiv'
+require "yakubiv"

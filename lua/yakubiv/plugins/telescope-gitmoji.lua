@@ -1,13 +1,13 @@
 return {
-	'olacin/telescope-gitmoji.nvim',
-	dependencies = { 'nvim-telescope/telescope.nvim' },
+	"olacin/telescope-gitmoji.nvim",
+	dependencies = { "nvim-telescope/telescope.nvim" },
 	cmd = "Telescope gitmoji",
 
 	opts = {
 		action = function(entry)
 			local emoji = entry.value.value
 
-			if vim.bo.filetype == 'gitcommit' then
+			if vim.bo.filetype == "gitcommit" then
 				vim.api.nvim_put({ emoji }, "c", true, true)
 				return
 			end
@@ -28,8 +28,8 @@ return {
 	},
 
 	config = function(self, opts)
-		local telescope = require 'telescope'
+		local telescope = require "telescope"
 		telescope.setup { extensions = { gitmoji = opts } }
-		telescope.load_extension('gitmoji')
+		telescope.load_extension "gitmoji"
 	end,
 }

@@ -1,8 +1,8 @@
 return {
-	'nvim-neorg/neorg',
+	"nvim-neorg/neorg",
 	dependencies = {
 		{ "vhyrro/luarocks.nvim", opts = {} },
-		'hrsh7th/nvim-cmp',
+		"hrsh7th/nvim-cmp",
 	},
 	ft = { "norg" },
 	cmd = "Neorg",
@@ -42,8 +42,8 @@ return {
 
 			["core.completion"] = { -- does not work 🤔
 				config = {
-					engine = 'nvim-cmp',
-					name = 'norg',
+					engine = "nvim-cmp",
+					name = "norg",
 				},
 			},
 
@@ -55,7 +55,7 @@ return {
 
 			["core.export"] = {
 				config = {},
-			}
+			},
 		},
 	},
 }

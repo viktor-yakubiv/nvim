@@ -1,11 +1,11 @@
 return {
-	'nvim-telescope/telescope.nvim',
+	"nvim-telescope/telescope.nvim",
 	dependencies = {
-		{ 'nvim-lua/plenary.nvim' },
+		{ "nvim-lua/plenary.nvim" },
 		{
-			'nvim-telescope/telescope-fzf-native.nvim',
-			name = 'telescope-fzf',
-			build = 'make',
+			"nvim-telescope/telescope-fzf-native.nvim",
+			name = "telescope-fzf",
+			build = "make",
 		},
 	},
 	cmd = "Telescope",
@@ -13,16 +13,16 @@ return {
 	opts = {
 		pickers = {
 			find_files = {
-				find_command = { 'rg', '--files' },
+				find_command = { "rg", "--files" },
 			},
 
 			symbols = {
-				sources = { 'emoji', 'gitmoji' },
+				sources = { "emoji", "gitmoji" },
 			},
 		},
 	},
 
-	config = function (self, opts)
+	config = function(self, opts)
 		local telescope = require "telescope"
 		telescope.setup(opts)
 		telescope.load_extension "fzf"

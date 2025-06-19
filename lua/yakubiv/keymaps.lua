@@ -71,67 +71,84 @@ keymap { "<D-S-s>", "<cmd>writeall<cr>", mode = "" }
 keymap { "<D-q>", "<cmd>quit<cr>", mode = "" }
 
 plugins.telescope.keys = {
-	{ '<leader>fr', "<cmd>Telescope resume<cr>", desc = "Resume previous" },
-	{ '<leader>ff', "<cmd>Telescope find_files<cr>", desc = "Find files" },
+	{ "<leader>fr", "<cmd>Telescope resume<cr>", desc = "Resume previous" },
+	{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
 	{ "<D-p>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-	{ '<leader>fg', "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-	{ '<leader>gf', "<cmd>Telescope git_files<cr>", desc = "Git files" },
-	{ '<leader>fb', "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-	{ '<leader>fh', "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-	{ '<leader>fk', "<cmd>Telescope keymaps<cr>", desc = "Find keymaps" },
-	{ '<leader>/', function()
-		require("telescope.builtin").current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-			previewer = false,
-		})
-	end,  desc = 'Fuzzily search in current buffer' },
+	{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+	{ "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "Git files" },
+	{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+	{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
+	{ "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Find keymaps" },
 	{
-		'<leader>f/',
+		"<leader>/",
+		function()
+			require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+				previewer = false,
+			})
+		end,
+		desc = "Fuzzily search in current buffer",
+	},
+	{
+		"<leader>f/",
 		function()
 			require("telescope.builtin").live_grep {
 				grep_open_files = true,
-				prompt_title = 'Live Grep in Open Files',
+				prompt_title = "Live Grep in Open Files",
 			}
 		end,
-		desc = 'Live grep in Open Files',
+		desc = "Live grep in Open Files",
 	},
 	{
-		'<leader>fn',
+		"<leader>fn",
 		function()
-			require("telescope.builtin").find_files { cwd = vim.fn.stdpath 'config' }
+			require("telescope.builtin").find_files { cwd = vim.fn.stdpath "config" }
 		end,
-		desc = 'Find Neovim files',
+		desc = "Find Neovim files",
 	},
 }
 
 plugins.telescope_gitmoji.keys = {
-	{ '<leader>ge', '<cmd>Telescope gitmoji<cr>', desc = "Gitmoji" },
+	{ "<leader>ge", "<cmd>Telescope gitmoji<cr>", desc = "Gitmoji" },
 }
 
 plugins.oil.keys = {
 	{ "-", "<cmd>Oil<cr>" },
-	{ "<leader>-", function() require("oil").open(vim.fn.getcwd()) end },
+	{
+		"<leader>-",
+		function()
+			require("oil").open(vim.fn.getcwd())
+		end,
+	},
 }
 
 plugins.treesj.keys = {
-	{ "<localleader>m", function() require("treesj").toggle() end, desc = "Toggle split/join" }
+	{
+		"<localleader>m",
+		function()
+			require("treesj").toggle()
+		end,
+		desc = "Toggle split/join",
+	},
 }
 
 plugins.neotree.keys = {
-	{ "\\",  "<cmd>Neotree focus<cr>" },
+	{ "\\", "<cmd>Neotree focus<cr>" },
 	{ "\\r", "<cmd>Neotree reveal<cr>" },
 	{ "\\g", "<cmd>Neotree git_status<cr>" },
 	{ "\\b", "<cmd>Neotree buffers<cr>" },
 }
 
 plugins.tree.keys = {
-	{ "\\",  "<cmd>NvimTreeOpen<cr>" },
+	{ "\\", "<cmd>NvimTreeOpen<cr>" },
 	{ "\\r", "<cmd>NvimTreeFindFile<cr>" },
 } and {} -- effectively disabling keys
 
 plugins.neogit.keys = {
 	{
 		"<leader>gs",
-		function() require("neogit").open() end,
+		function()
+			require("neogit").open()
+		end,
 		desc = "Git status",
 	},
 }
@@ -142,9 +159,13 @@ plugins.gitsigns.setup {
 
 		local function navigator(keystroke, action)
 			return function()
-				if vim.wo.diff then return keystroke end
-				vim.schedule(function() action() end)
-				return '<Ignore>'
+				if vim.wo.diff then
+					return keystroke
+				end
+				vim.schedule(function()
+					action()
+				end)
+				return "<Ignore>"
 			end
 		end
 
@@ -156,16 +177,42 @@ plugins.gitsigns.setup {
 			-- Actions
 			{ "<localleader>hs", gs.stage_hunk, desc = "Stage hunk" },
 			{ "<localleader>hr", gs.reset_hunk, desc = "Reset hunk" },
-			{ "<localleader>hs", function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end, mode = "v", desc = "Stage hunk" },
-			{ "<localleader>hr", function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end, mode = "v", desc = "Reset hunk" },
+			{
+				"<localleader>hs",
+				function()
+					gs.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
+				end,
+				mode = "v",
+				desc = "Stage hunk",
+			},
+			{
+				"<localleader>hr",
+				function()
+					gs.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
+				end,
+				mode = "v",
+				desc = "Reset hunk",
+			},
 			{ "<localleader>hS", gs.stage_buffer, desc = "Stage buffer" },
 			{ "<localleader>hu", gs.undo_stage_hunk, desc = "Undo hunk staging" },
 			{ "<localleader>hR", gs.reset_buffer, desc = "Reset buffer" },
 			{ "<localleader>hp", gs.preview_hunk, desc = "Preview hunk" },
-			{ "<localleader>hb", function() gs.blame_line { full = true } end, desc = "Blame line" },
+			{
+				"<localleader>hb",
+				function()
+					gs.blame_line { full = true }
+				end,
+				desc = "Blame line",
+			},
 			{ "<localleader>tb", gs.toggle_current_line_blame, desc = "Toggle current line blame" },
 			{ "<localleader>hd", gs.diffthis, desc = "Diff this" },
-			{ "<localleader>hD", function() gs.diffthis("~") end, desc = "Diff ~" },
+			{
+				"<localleader>hD",
+				function()
+					gs.diffthis "~"
+				end,
+				desc = "Diff ~",
+			},
 			{ "<localleader>td", gs.toggle_deleted, desc = "Toggle deleted hunks" },
 
 			-- Text object
@@ -175,7 +222,7 @@ plugins.gitsigns.setup {
 		for _, map in ipairs(maps) do
 			keymap(vim.tbl_extend("force", { buffer = bufnr }, map))
 		end
-	end
+	end,
 }
 
 plugins.neorg.keys = {
@@ -183,18 +230,30 @@ plugins.neorg.keys = {
 	{ "<leader>nr", "<cmd>Neorg return<cr>", desc = "Return from notes" },
 }
 
-local config_hover = plugins.hover.config or function () end
+local config_hover = plugins.hover.config or function() end
 plugins.hover:extend {
 	keys = { "K", "gK", "<C-p>", "<C-n>" },
 	event = "VeryLazy", -- for mouse events, could be MouseMove
-	config = function (plugin, opts)
+	config = function(plugin, opts)
 		config_hover(plugin, opts)
 
 		local hover = require "hover"
 
 		keymap { "K", hover.hover, desc = "hover.nvim" }
 		keymap { "gK", hover.hover_select, desc = "hover.nvim (select)" }
-		keymap { "<C-p>", function() hover.hover_switch("previous") end, desc = "hover.nvim (previous source)"}
-		keymap { "<C-n>", function() hover.hover_switch("next") end, desc = "hover.nvim (next source)"}
+		keymap {
+			"<C-p>",
+			function()
+				hover.hover_switch "previous"
+			end,
+			desc = "hover.nvim (previous source)",
+		}
+		keymap {
+			"<C-n>",
+			function()
+				hover.hover_switch "next"
+			end,
+			desc = "hover.nvim (next source)",
+		}
 	end,
 }

@@ -27,7 +27,7 @@ local options = {
 
 	-- Show hidden characters
 	list = true,
-	listchars= "tab:→ ,trail:~,eol:¬,extends:❯,precedes:❮,nbsp:␣",
+	listchars = "tab:→ ,trail:~,eol:¬,extends:❯,precedes:❮,nbsp:␣",
 
 	-- Persistent undo even after you close a file and re-open it
 	undofile = true,
@@ -42,26 +42,38 @@ end
 -- Ignore certain files and folders when globing
 vim.opt.wildignore:append {
 	-- system caches
-	'*.DS_Store',
+	"*.DS_Store",
 
 	-- compiled files
-	'*.o', '*.obj', '*.dylib', '*.bin', '*.dll', '*.exe',
+	"*.o",
+	"*.obj",
+	"*.dylib",
+	"*.bin",
+	"*.dll",
+	"*.exe",
 
 	-- cache and version control
-	'*/.git/*', '*/__pycache__/*',
+	"*/.git/*",
+	"*/__pycache__/*",
 
 	-- non-tex files, binaries
-	'*.jpg', '*.png', '*.jpeg', '*.bmp', '*.gif', '*.tiff', '*.ico',
+	"*.jpg",
+	"*.png",
+	"*.jpeg",
+	"*.bmp",
+	"*.gif",
+	"*.tiff",
+	"*.ico",
 }
 
-vim.opt.wildignorecase = true  -- ignore file and dir name cases in cmd-completion
+vim.opt.wildignorecase = true -- ignore file and dir name cases in cmd-completion
 
 -- Lang mapping does not work with key bindings
 --
 -- Related issues:
 -- https://github.com/neovim/neovim/issues/27776
 -- https://github.com/vim/vim/issues/297
-local specials = { ";", ',', '"', '|', "\\" }
+local specials = { ";", ",", '"', "|", "\\" }
 local function escape(char)
 	if vim.tbl_contains(specials, char) then
 		return "\\" .. char

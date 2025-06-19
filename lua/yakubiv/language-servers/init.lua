@@ -9,7 +9,7 @@ local function prepare_config(preconfig)
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-	local cmp_installed, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+	local cmp_installed, cmp_lsp = pcall(require, "cmp_nvim_lsp")
 	if cmp_installed then
 		capabilities = cmp_lsp.default_capabilities(capabilities)
 	end
@@ -35,7 +35,9 @@ end
 
 local function attach_methods(config)
 	config.extend = extend_config
-	config.setup = function(opts) config:extend { settings = opts } end
+	config.setup = function(opts)
+		config:extend { settings = opts }
+	end
 end
 
 plugins.mason_lspconfig.setup {
@@ -68,7 +70,7 @@ end
 
 M.prepare_config = prepare_config
 
-M.override_handler = function (server_name, fn)
+M.override_handler = function(server_name, fn)
 	local handlers = {}
 	handlers[server_name] = fn
 	plugins.mason_lspconfig.setup { handlers = handlers }

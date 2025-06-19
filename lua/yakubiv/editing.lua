@@ -7,10 +7,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.wo.conceallevel = 2 -- hide redundant characters
 		vim.bo.expandtab = true -- Indent using spaces
-
-	end
+	end,
 })
-
 
 plugins.oil.setup {
 	skip_confirm_for_simple_edits = true,
