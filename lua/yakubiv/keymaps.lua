@@ -14,6 +14,13 @@ local function keymap(conf)
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+local function bind(func, ...)
+	local args = { ... }
+	return function()
+		func(unpack(args))
+	end
+end
+
 -- Remap space as leader key
 -- It is more handy on normal keyboards;
 -- the default "\" appears in different places on EU and US layouts
@@ -179,17 +186,19 @@ plugins.gitsigns.setup {
 			{ "<localleader>hr", gs.reset_hunk, desc = "Reset hunk" },
 			{
 				"<localleader>hs",
-				function()
-					gs.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
-				end,
+				bind(gs.stage_hunk, {
+					vim.fn.line ".",
+					vim.fn.line "v",
+				}),
 				mode = "v",
 				desc = "Stage hunk",
 			},
 			{
 				"<localleader>hr",
-				function()
-					gs.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
-				end,
+				bind(gs.reset_hunk, {
+					vim.fn.line ".",
+					vim.fn.line "v",
+				}),
 				mode = "v",
 				desc = "Reset hunk",
 			},
@@ -206,13 +215,7 @@ plugins.gitsigns.setup {
 			},
 			{ "<localleader>tb", gs.toggle_current_line_blame, desc = "Toggle current line blame" },
 			{ "<localleader>hd", gs.diffthis, desc = "Diff this" },
-			{
-				"<localleader>hD",
-				function()
-					gs.diffthis "~"
-				end,
-				desc = "Diff ~",
-			},
+			{ "<localleader>hD", bind(gs.diffthis, "~"), desc = "Diff ~" },
 			{ "<localleader>td", gs.toggle_deleted, desc = "Toggle deleted hunks" },
 
 			-- Text object
@@ -238,22 +241,9 @@ plugins.hover:extend {
 		config_hover(plugin, opts)
 
 		local hover = require "hover"
-
 		keymap { "K", hover.hover, desc = "hover.nvim" }
 		keymap { "gK", hover.hover_select, desc = "hover.nvim (select)" }
-		keymap {
-			"<C-p>",
-			function()
-				hover.hover_switch "previous"
-			end,
-			desc = "hover.nvim (previous source)",
-		}
-		keymap {
-			"<C-n>",
-			function()
-				hover.hover_switch "next"
-			end,
-			desc = "hover.nvim (next source)",
-		}
+		keymap { "<C-p>", bind(hover.hover_switch, "previous"), desc = "hover.nvim (previous source)" }
+		keymap { "<C-n>", bind(hover.hover_switch, "next"), desc = "hover.nvim (next source)" }
 	end,
 }
