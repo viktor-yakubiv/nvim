@@ -21,12 +21,12 @@ plugins.catppuccin:extend {
 	end,
 }
 
-plugins.web_devicons.opts = {
+plugins.web_devicons.setup {
 	color_icons = false,
 	default = true,
 }
 
-plugins.neogit.opts = {
+plugins.neogit.setup {
 	graph_style = "unicode",
 	signs = {
 		-- { CLOSED, OPENED }
