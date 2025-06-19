@@ -1,0 +1,6 @@
+# Neovim's fixed version
+syntax = "Lua51"
+
+# My preferences
+indent_width = 2
+call_parentheses = "None"
