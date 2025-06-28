@@ -21,6 +21,18 @@ local function bind(func, ...)
 	end
 end
 
+local function bind_module(module_name)
+	return function(func_name, ...)
+		local args = { ... }
+		return function ()
+			local module = require(module_name)
+			local func = module[func_name]
+			func(unpack(args))
+		end
+	end
+end
+
+
 -- Remap space as leader key
 -- It is more handy on normal keyboards;
 -- the default "\" appears in different places on EU and US layouts
@@ -233,19 +245,13 @@ plugins.neorg.keys = {
 	{ "<leader>nr", "<cmd>Neorg return<cr>", desc = "Return from notes" },
 }
 
-local config_hover = plugins.hover.config or function() end
+local hover = bind_module("hover")
 plugins.hover:extend {
-	keys = { "K", "gK", "<C-p>", "<C-n>" },
-	event = "VeryLazy", -- for mouse events, could be MouseMove
-	config = function(plugin, opts)
-		config_hover(plugin, opts)
-
-		local hover = require "hover"
-		keymap { "K", hover.hover, desc = "hover.nvim" }
-		keymap { "gK", hover.hover_select, desc = "hover.nvim (select)" }
-		keymap { "<C-p>", bind(hover.hover_switch, "previous"), desc = "hover.nvim (previous source)" }
-		keymap { "<C-n>", bind(hover.hover_switch, "next"), desc = "hover.nvim (next source)" }
-	end,
+	keys = {
+		{ "K", hover("hover"), desc = "Details popover" },
+		{ "<C-p>", hover("hover_switch", "previous"), desc = "Previous source" },
+		{ "<C-n>", hover("hover_switch", "next"), desc = "Next source" },
+	},
 }
 
 plugins.codecompanion:extend {
