@@ -19,6 +19,18 @@ return {
 			symbols = {
 				sources = { "emoji", "gitmoji" },
 			},
+
+			git_status = {
+				initial_mode = "normal",
+			},
+
+			git_commits = {
+				initial_mode = "normal",
+			},
+
+			git_bcommits = {
+				initial_mode = "normal",
+			},
 		},
 	},
 

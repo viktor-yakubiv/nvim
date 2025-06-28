@@ -24,14 +24,13 @@ end
 local function bind_module(module_name)
 	return function(func_name, ...)
 		local args = { ... }
-		return function ()
+		return function()
 			local module = require(module_name)
 			local func = module[func_name]
 			func(unpack(args))
 		end
 	end
 end
-
 
 -- Remap space as leader key
 -- It is more handy on normal keyboards;
@@ -89,40 +88,43 @@ keymap { "<D-s>", "<cmd>write<cr>", mode = "" }
 keymap { "<D-S-s>", "<cmd>writeall<cr>", mode = "" }
 keymap { "<D-q>", "<cmd>quit<cr>", mode = "" }
 
-plugins.telescope.keys = {
-	{ "<leader>fr", "<cmd>Telescope resume<cr>", desc = "Resume previous" },
-	{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-	{ "<D-p>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-	{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-	{ "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "Git files" },
-	{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-	{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-	{ "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Find keymaps" },
-	{
-		"<leader>/",
-		function()
-			require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
-				previewer = false,
-			})
-		end,
-		desc = "Fuzzily search in current buffer",
-	},
-	{
-		"<leader>f/",
-		function()
-			require("telescope.builtin").live_grep {
+local telescope = bind_module "telescope.builtin"
+plugins.telescope:extend {
+	keys = {
+		{ "<leader>fr", telescope "resume", desc = "Resume previous search" },
+		{ "<leader>ff", telescope "find_files", desc = "Find files" },
+		{ "<D-p>", telescope "find_files", desc = "Find files" },
+		{ "<leader>fg", telescope "live_grep", desc = "Live grep" },
+		{ "<leader>gf", telescope "git_files", desc = "Git files" },
+		{ "<leader>fb", telescope "buffers", desc = "Buffers" },
+		{ "<leader>fh", telescope "help_tags", desc = "Help tags" },
+		{ "<leader>fk", telescope "keymaps", desc = "Find keymaps" },
+		{
+			"<leader>/",
+			function()
+				require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+					previewer = false,
+				})
+			end,
+			desc = "Fuzzily search in current buffer",
+		},
+		{
+			"<leader>f/",
+			telescope("live_grep", {
 				grep_open_files = true,
 				prompt_title = "Live Grep in Open Files",
-			}
-		end,
-		desc = "Live grep in Open Files",
-	},
-	{
-		"<leader>fn",
-		function()
-			require("telescope.builtin").find_files { cwd = vim.fn.stdpath "config" }
-		end,
-		desc = "Find Neovim files",
+			}),
+			desc = "Live grep in Open Files",
+		},
+		{
+			"<leader>fn",
+			telescope("find_files", { cwd = vim.fn.stdpath "config" }),
+			desc = "Find Neovim files",
+		},
+
+		{ "<leader>gs", telescope "git_status", desc = "Git status" },
+		{ "<leader>gl", telescope "git_commits", desc = "Git log" },
+		{ "<leader>gbl", telescope "git_bcommits", desc = "Git buffer log" },
 	},
 }
 
@@ -161,16 +163,6 @@ plugins.tree.keys = {
 	{ "\\", "<cmd>NvimTreeOpen<cr>" },
 	{ "\\r", "<cmd>NvimTreeFindFile<cr>" },
 } and {} -- effectively disabling keys
-
-plugins.neogit.keys = {
-	{
-		"<leader>gs",
-		function()
-			require("neogit").open()
-		end,
-		desc = "Git status",
-	},
-}
 
 plugins.gitsigns.setup {
 	on_attach = function(bufnr)
@@ -245,10 +237,10 @@ plugins.neorg.keys = {
 	{ "<leader>nr", "<cmd>Neorg return<cr>", desc = "Return from notes" },
 }
 
-local hover = bind_module("hover")
+local hover = bind_module "hover"
 plugins.hover:extend {
 	keys = {
-		{ "K", hover("hover"), desc = "Details popover" },
+		{ "K", hover "hover", desc = "Details popover" },
 		{ "<C-p>", hover("hover_switch", "previous"), desc = "Previous source" },
 		{ "<C-n>", hover("hover_switch", "next"), desc = "Next source" },
 	},
