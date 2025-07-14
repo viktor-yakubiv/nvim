@@ -251,3 +251,33 @@ plugins.codecompanion:extend {
 		{ "<Leader>cc", "<cmd>CodeCompanionChat<cr>" },
 	},
 }
+
+--- Data Analysis Workflow
+local quarto = bind_module "quarto"
+local quarto_run = bind_module "quarto.runner"
+plugins.quarto:extend {
+	keys = {
+		{ "<leader>qp", quarto "quartoPreview", desc = "Quarto Preview" },
+
+		-- Runners
+		{ "<localleader>rc", quarto_run "run_cell", desc = "Run cell" },
+		{ "<localleader>ra", quarto_run "run_above", desc = "Run cell and above" },
+		{ "<localleader>rA", quarto_run "run_all", desc = "Run all cells" },
+		{ "<localleader>rl", quarto_run "run_line", desc = "Run line" },
+		{ "<localleader>r", quarto_run "run_range", desc = "Run visual range", mode = "v" },
+		{ "<localleader>RA", quarto_run("run_all", true), desc = "Run all cells of all languages" },
+	},
+}
+
+local iron = bind_module "iron.core"
+plugins.iron:extend {
+	keys = {
+		{ "<LocalLeader>rr", iron "toggle_repl", desc = "REPL toggle" },
+		{ "<LocalLeader>rR", iron "restart_repl", desc = "REPL restart" }, -- calls `IronRestart` to restart the repl
+		{ "<LocalLeader>sc", iron "send_motion", desc = "Send motion" },
+		{ "<LocalLeader>s<cr>", iron "cr", desc = "" },
+		{ "<LocalLeader>s<space>", iron "interrupt", desc = "REPL Interrupt" },
+		{ "<LocalLeader>sq", iron "exit", desc = "REPL exit" },
+		{ "<LocalLeader>cl", iron "clear", desc = "" },
+	},
+}

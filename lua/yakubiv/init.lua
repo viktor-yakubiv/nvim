@@ -5,6 +5,7 @@ require "yakubiv.keymaps"
 require "yakubiv.navigation"
 require "yakubiv.editing"
 require "yakubiv.llm"
+require "yakubiv.data-analysis"
 
 require "yakubiv.language-servers.markup"
 require "yakubiv.language-servers.css"
